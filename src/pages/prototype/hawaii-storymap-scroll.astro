@@ -1,0 +1,118 @@
+---
+import "../../styles/hawaii-storymap-scroll.css";
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b0b0c" />
+  <meta name="description" content="Prototype scrollytelling interaction for the Hawaiʻi lava-risk case study." />
+  <title>Hawaiʻi Lava StoryMap Scroll Prototype</title>
+</head>
+<body>
+  <a class="skip-link" href="#story">Skip to story</a>
+
+  <header class="prototype-bar">
+    <div class="prototype-brand">
+      <span class="prototype-mark" aria-hidden="true">▲</span>
+      <div>
+        <span class="prototype-kicker">SPATIALGROUND LAB</span>
+        <strong>Hawaiʻi StoryMap Prototype</strong>
+      </div>
+    </div>
+    <a class="formal-link" href="/projects/hawaii-lava-risk/">← Formal project</a>
+  </header>
+
+  <main>
+    <section class="prototype-intro">
+      <p class="eyebrow">SCROLLYTELLING INTERACTION TEST</p>
+      <h1>One map stage.<br /><span>Four analytical chapters.</span></h1>
+      <p class="intro-copy">Scroll through the narrative. The map remains in place and changes as the analytical focus moves from island-wide hazard context to high-hazard parcels and infrastructure.</p>
+      <div class="intro-cue" aria-hidden="true"><span></span> Scroll to test</div>
+    </section>
+
+    <section class="story-shell" id="story" aria-label="Hawaiʻi lava-risk scrollytelling prototype">
+      <div class="story-copy">
+        <article class="story-step is-active" data-step="0" tabindex="0">
+          <div class="step-topline"><span>01</span><span>ISLAND OVERVIEW</span></div>
+          <h2>Start with the whole hazard landscape.</h2>
+          <p>Hawaiʻi Island is divided into nine USGS lava-flow hazard zones. The overview map places parcel distribution, major roads, volcanoes, and long-term relative hazard in one frame.</p>
+          <p class="step-note">This is long-term hazard context, not a forecast of where or when the next eruption will occur.</p>
+        </article>
+
+        <article class="story-step" data-step="1" tabindex="0">
+          <div class="step-topline"><span>02</span><span>ZONES 1 &amp; 2</span></div>
+          <h2>Then narrow attention to the two highest hazard classifications.</h2>
+          <p>Zone 1 includes the summits and rift zones of Kīlauea and Mauna Loa. Zone 2 generally includes areas adjacent to and downslope of active rift zones.</p>
+          <div class="mini-stat"><strong>24,528</strong><span>parcel features intersect Zones 1 or 2</span></div>
+        </article>
+
+        <article class="story-step" data-step="2" tabindex="0">
+          <div class="step-topline"><span>03</span><span>PARCEL EXPOSURE</span></div>
+          <h2>Translate regional hazard into a land-management question.</h2>
+          <p>The spatial intersection identified 24,528 parcel features touching Zones 1 or 2. Of those, 4,183 intersect Zone 1.</p>
+          <div class="stat-pair">
+            <div><strong>18.1%</strong><span>Zones 1 or 2</span></div>
+            <div><strong>3.1%</strong><span>Zone 1</span></div>
+          </div>
+          <p class="step-note">Parcel features are not equivalent to homes, households, residents, or unique owners.</p>
+        </article>
+
+        <article class="story-step" data-step="3" tabindex="0">
+          <div class="step-topline"><span>04</span><span>INFRASTRUCTURE</span></div>
+          <h2>Move from exposure counts toward planning consequences.</h2>
+          <p>The infrastructure view adds roads, hospitals, fire stations, and emergency shelters to the hazard-zone context. This is the bridge from mapping exposure to questions about access, preparedness, and continuity of services.</p>
+          <p class="step-note">This prototype shows a narrative transition only; it does not model evacuation capacity or predict future lava-flow extent.</p>
+        </article>
+      </div>
+
+      <aside class="map-column" aria-label="Sticky map stage">
+        <div class="map-stage" data-active-step="0">
+          <div class="map-stage-top">
+            <div>
+              <span class="map-label">ACTIVE CHAPTER</span>
+              <strong id="map-title">Island overview</strong>
+            </div>
+            <span class="step-counter" id="step-counter">01 / 04</span>
+          </div>
+
+          <div class="map-viewport">
+            <div class="map-scrim" aria-hidden="true"></div>
+            <img class="map-layer layer-overview is-active" data-layer="overview" src="/lava-risk/assets/main-map.jpg" alt="Island-wide map of Hawaiʻi lava-flow hazard zones and parcel distribution" />
+            <img class="map-layer layer-highrisk" data-layer="highrisk" src="/lava-risk/assets/high-risk-map.jpg" alt="Map of parcels located in lava-flow hazard Zones 1 and 2" />
+            <img class="map-layer layer-parcels" data-layer="parcels" src="/lava-risk/assets/high-risk-map.jpg" alt="Focused map of parcel exposure in lava-flow hazard Zones 1 and 2" />
+            <img class="map-layer layer-infrastructure" data-layer="infrastructure" src="/lava-risk/assets/infrastructure-map.jpg" alt="Map of critical infrastructure and lava hazard zones" />
+            <div class="map-vignette" aria-hidden="true"></div>
+            <div class="map-status" id="map-status">Long-term hazard context</div>
+          </div>
+
+          <div class="map-caption-row">
+            <p id="map-caption">Island-wide hazard zones, parcels, major roads, and volcanoes.</p>
+            <span>Static GIS output · scroll-driven prototype</span>
+          </div>
+
+          <nav class="chapter-rail" aria-label="Story chapters">
+            <button class="rail-dot is-active" data-target-step="0" aria-label="Go to chapter 1"><span>01</span></button>
+            <button class="rail-dot" data-target-step="1" aria-label="Go to chapter 2"><span>02</span></button>
+            <button class="rail-dot" data-target-step="2" aria-label="Go to chapter 3"><span>03</span></button>
+            <button class="rail-dot" data-target-step="3" aria-label="Go to chapter 4"><span>04</span></button>
+          </nav>
+        </div>
+      </aside>
+    </section>
+
+    <section class="prototype-end">
+      <p class="eyebrow">PROTOTYPE END</p>
+      <h2>The interaction can be transplanted into the formal case study without rebuilding the whole page.</h2>
+      <p>The test is intentionally limited to existing project maps and existing analytical claims. It is meant to answer one question: does scroll-driven map choreography improve the Hawaiʻi story?</p>
+      <div class="end-actions">
+        <a href="#story">Replay prototype ↑</a>
+        <a href="/projects/hawaii-lava-risk/">Return to formal project →</a>
+      </div>
+    </section>
+  </main>
+
+  <script is:inline src="/hawaii-storymap-scroll/storymap.js"></script>
+</body>
+</html>

@@ -1,0 +1,950 @@
+---
+const projects = [
+  {
+    number: "01",
+    location: "HAWAIʻI ISLAND",
+    title: "Lava Hazard Analysis",
+    tags: "Natural Hazards · Spatial Analysis · Risk Assessment",
+    className: "lava",
+    href: "/projects/hawaii-lava-risk/",
+  },
+  {
+    number: "02",
+    location: "SAMISH BAY",
+    title: "Marsh Migration",
+    tags: "Sea-Level Rise · Conservation GIS · Spatial Planning",
+    className: "marsh",
+  },
+  {
+    number: "03",
+    location: "PUBLIC LANDS",
+    title: "Multiple-Use Management",
+    tags: "Environmental Policy · BLM · FLPMA",
+    className: "lands",
+  },
+  {
+    number: "04",
+    location: "NATURAL RESOURCES",
+    title: "Habitat Suitability",
+    tags: "Spatial Modeling · GIS · Multi-Criteria Analysis",
+    className: "habitat",
+  },
+  {
+    number: "05",
+    location: "FIELD MONITORING",
+    title: "Drone + GIS",
+    tags: "Remote Sensing · Monitoring · Natural Resources",
+    className: "drone",
+  },
+  {
+    number: "06",
+    location: "PROJECT PLACEHOLDER",
+    title: "Future Project",
+    tags: "Upcoming environmental GIS work",
+    className: "placeholderSix",
+  },
+  {
+    number: "07",
+    location: "PROJECT PLACEHOLDER",
+    title: "Future Project",
+    tags: "Upcoming environmental GIS work",
+    className: "placeholderSeven",
+  },
+  {
+    number: "08",
+    location: "PROJECT PLACEHOLDER",
+    title: "Future Project",
+    tags: "Upcoming environmental GIS work",
+    className: "placeholderEight",
+  },
+  {
+    number: "09",
+    location: "PROJECT PLACEHOLDER",
+    title: "Future Project",
+    tags: "Upcoming environmental GIS work",
+    className: "placeholderNine",
+  },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SpatialGround — 9-Card Compressed-Rear Prototype</title>
+  </head>
+
+  <body>
+    <main class="stage">
+      <div class="topography"></div>
+      <div class="vignette"></div>
+
+      <header>
+        <div>
+          <div class="brand">SPATIALGROUND</div>
+          <div class="subbrand">
+            GIS · NATURAL RESOURCES · ENVIRONMENTAL POLICY
+          </div>
+        </div>
+
+        <div class="prototype">9-CARD COMPRESSED-REAR PROTOTYPE</div>
+      </header>
+
+      <section class="work">
+        <div class="section-label">SELECTED WORK</div>
+
+        <div class="scene" id="scene">
+          <div class="cylinder" id="cylinder">
+            {
+              projects.map((project, index) => (
+                <article
+                  class={`card ${project.className}`}
+                  data-index={index}
+                >
+                  {index === 0 ? (
+                    <iframe class="hawaii-v7-frame" src="/hawaii-v7-ring.html" title="Hawaiʻi Island V7 animated artwork" tabindex="-1" aria-hidden="true"></iframe>
+                  ) : (
+                    <div class="visual"></div>
+                  )}
+                  {index !== 0 && <div class="shade"></div>}
+
+                  <div class={index === 0 ? "content lava-original-hidden" : "content"}>
+                    <div class="number">{project.number}</div>
+
+                    <div class="card-bottom">
+                      <div class="location">{project.location}</div>
+                      <h2>{project.title}</h2>
+                      <div class="rule"></div>
+                      <p>{project.tags}</p>
+                      <div class="view">{index === 0 ? "VIEW PROJECT →" : "COMING SOON"}</div>
+                    </div>
+                  </div>
+                </article>
+              ))
+            }
+          </div>
+
+          <div class="floor"></div>
+        </div>
+
+        <div class="controls">
+          <button id="prev" aria-label="Previous project">←</button>
+
+          <div class="dots" id="dots">
+            {
+              projects.map((_, index) => (
+                <button
+                  class="dot"
+                  data-index={index}
+                  aria-label={`Go to project ${index + 1}`}
+                ></button>
+              ))
+            }
+          </div>
+
+          <button id="next" aria-label="Next project">→</button>
+        </div>
+
+        <div class="instruction">
+          DRAG · SCROLL · USE ← →
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const cards = Array.from(document.querySelectorAll(".card"));
+      const dots = Array.from(document.querySelectorAll(".dot"));
+      const scene = document.getElementById("scene");
+      const prev = document.getElementById("prev");
+      const next = document.getElementById("next");
+
+      const count = cards.length;
+      let current = 0;
+
+
+
+      function shortestDistance(index, active) {
+        let diff = index - active;
+
+        if (diff > count / 2) diff -= count;
+        if (diff < -count / 2) diff += count;
+
+        return diff;
+      }
+
+      function updateCards() {
+        const compact = window.innerWidth <= 850;
+
+        // Nine-slot tilted exhibition ring.
+        // The two deepest cards sit side-by-side at the rear instead
+        // of converging into one centered apex.
+        const radiusX = compact ? 400 : 835;
+        const radiusZ = compact ? 575 : 1000;
+        const rise = compact ? 150 : 235;
+
+        cards.forEach((card, index) => {
+          const diff = shortestDistance(index, current);
+          const absDiff = Math.abs(diff);
+
+          // 9 cards => symmetric signed distances -4...+4.
+          // ±4 are the two deepest rear cards and are deliberately
+          // kept apart so they form a rear pair.
+          const angleMap = compact
+            ? [0, 38, 74, 108, 148]
+            : [0, 38, 73, 106, 146];
+
+          const angle =
+            diff === 0 ? 0 : Math.sign(diff) * angleMap[absDiff];
+
+          const rad = angle * Math.PI / 180;
+
+          // Preserve the existing ring's Y/Z geometry.
+          // On desktop/tablet only, compress the REAR cards horizontally
+          // toward the center, matching the inward arrows in the screenshot.
+          // Mobile stays exactly as before.
+          const baseX = Math.sin(rad) * radiusX;
+
+          const rearXCompression =
+            compact
+              ? 1
+              : absDiff === 4
+                ? 0.60
+                : absDiff === 3
+                  ? 0.80
+                  : 1;
+
+          const x = baseX * rearXCompression;
+          const z = (Math.cos(rad) - 1) * radiusZ;
+          const y = (1 - Math.cos(rad)) * rise;
+
+          const depth = Math.max(
+            0,
+            Math.min(1, -z / (radiusZ * 1.35))
+          );
+
+          const scale = 1 - depth * 0.30;
+          const opacity = 1 - depth * 0.47;
+          const brightness = 1 - depth * 0.33;
+          const blur = depth * 1.0;
+
+          // Keep every card readable/front-facing. Only a tiny yaw
+          // hints at curvature; the rear pair is not mirrored.
+          const faceYaw =
+            diff === 0
+              ? 0
+              : Math.sign(diff) * Math.min(5, absDiff * 1.2);
+
+          const rotateX = Math.min(4.5, absDiff * 1.0);
+
+          card.style.transform = `
+            translate(-50%, -50%)
+            translate3d(${x}px, ${-y}px, ${z}px)
+            rotateY(${faceYaw}deg)
+            rotateX(${rotateX}deg)
+            scale(${scale})
+          `;
+
+          card.style.opacity = opacity.toString();
+          card.style.filter = `brightness(${brightness}) blur(${blur}px)`;
+          card.style.zIndex = String(Math.round(4000 + z));
+          const wasActive = card.classList.contains("active");
+          card.classList.toggle("active", diff === 0);
+          if (diff === 0 && !wasActive && index === 0) {
+            card.querySelector("iframe")?.contentWindow?.postMessage("spatialground:replay-v7", "*");
+          }
+        });
+
+        dots.forEach((dot, index) => {
+          dot.classList.toggle("active", index === current);
+        });
+      }
+
+      function normalizeCurrent() {
+        current = ((current % count) + count) % count;
+      }
+
+      function goTo(index) {
+        current = index;
+        normalizeCurrent();
+        updateCards();
+      }
+
+      function step(direction) {
+        goTo(current + direction);
+      }
+
+      prev?.addEventListener("click", () => step(-1));
+      next?.addEventListener("click", () => step(1));
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener("click", () => goTo(index));
+      });
+
+      window.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft") step(-1);
+        if (event.key === "ArrowRight") step(1);
+      });
+
+      let wheelLock = false;
+
+      scene?.addEventListener(
+        "wheel",
+        (event) => {
+          event.preventDefault();
+
+          if (wheelLock) return;
+
+          wheelLock = true;
+
+          const movement =
+            Math.abs(event.deltaX) > Math.abs(event.deltaY)
+              ? event.deltaX
+              : event.deltaY;
+
+          if (movement > 0) step(1);
+          if (movement < 0) step(-1);
+
+          setTimeout(() => {
+            wheelLock = false;
+          }, 420);
+        },
+        { passive: false }
+      );
+
+      // Unified interaction controller: visible topmost card only.
+      // Press origin is fixed for the gesture; dragging never navigates.
+      const DRAG_THRESHOLD = 8;
+      let press = null;
+
+      function visibleCardAt(x, y) {
+        const hit = document.elementFromPoint(x, y);
+        const card = hit instanceof Element ? hit.closest(".card") : null;
+        return card && scene?.contains(card) ? card : null;
+      }
+
+      function activateCard(index) {
+        if (index !== current) {
+          goTo(index);
+        } else if (index === 0) {
+          window.location.assign("/projects/hawaii-lava-risk/");
+        }
+      }
+
+      scene?.addEventListener("pointerdown", (event) => {
+        if (!event.isPrimary || (event.pointerType === "mouse" && event.button !== 0)) return;
+        const card = visibleCardAt(event.clientX, event.clientY);
+        press = {
+          id: event.pointerId,
+          type: event.pointerType,
+          index: card ? Number(card.dataset.index) : null,
+          x: event.clientX,
+          y: event.clientY,
+          start: current,
+          moved: false,
+          captured: false
+        };
+      });
+
+      scene?.addEventListener("pointermove", (event) => {
+        if (!press || event.pointerId !== press.id) return;
+        const dx = event.clientX - press.x;
+        const dy = event.clientY - press.y;
+        if (!press.moved && Math.hypot(dx, dy) > DRAG_THRESHOLD) {
+          press.moved = true;
+          scene.classList.add("dragging");
+          try {
+            scene.setPointerCapture(event.pointerId);
+            press.captured = true;
+          } catch (_) { /* Gesture may already have ended. */ }
+        }
+        if (press.moved && Math.abs(dx) > 75) {
+          current = press.start + Math.round(-dx / 180);
+          normalizeCurrent();
+          updateCards();
+        }
+      });
+
+      document.addEventListener("pointerup", (event) => {
+        if (!press || event.pointerId !== press.id) return;
+        const finished = press;
+        press = null;
+        scene?.classList.remove("dragging");
+        if (finished.captured && scene?.hasPointerCapture(event.pointerId)) {
+          scene.releasePointerCapture(event.pointerId);
+        }
+        const distance = Math.hypot(event.clientX - finished.x, event.clientY - finished.y);
+        if (finished.moved || distance > DRAG_THRESHOLD) {
+          return;
+        }
+        // Pointer events are authoritative for mouse/touch/pen.
+        // The card is identified at pointerdown, not after the ring moves.
+        if (finished.index !== null) activateCard(finished.index);
+      });
+
+      document.addEventListener("pointercancel", (event) => {
+        if (!press || event.pointerId !== press.id) return;
+        press = null;
+        scene?.classList.remove("dragging");
+      });
+
+      // Ignore the synthetic click following pointerup. Keyboard clicks
+      // (detail === 0) remain accessible through the same activation logic.
+      scene?.addEventListener("click", (event) => {
+        if (event.detail !== 0) return;
+        const card = event.target instanceof Element ? event.target.closest(".card") : null;
+        if (card) activateCard(Number(card.dataset.index));
+      });
+
+      updateCards();
+    </script>
+  </body>
+</html>
+
+<style>
+:global(*) {
+    box-sizing: border-box;
+  }
+
+  :global(html),
+  :global(body) {
+    margin: 0;
+    min-height: 100%;
+    background: #071016;
+  }
+
+  :global(body) {
+    overflow: hidden;
+    color: #f1eee4;
+    font-family:
+      Inter, ui-sans-serif, system-ui, -apple-system,
+      BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  button {
+    font: inherit;
+  }
+
+  .stage {
+    position: relative;
+    min-height: 100svh;
+    overflow: hidden;
+
+    background:
+      radial-gradient(
+        circle at 50% 44%,
+        #162634 0%,
+        #0b151d 35%,
+        #050b10 72%
+      );
+  }
+
+  .topography {
+    position: absolute;
+    inset: 0;
+    opacity: 0.22;
+
+    background:
+      repeating-radial-gradient(
+        ellipse at 50% 105%,
+        transparent 0,
+        transparent 43px,
+        rgba(181, 176, 139, 0.13) 44px,
+        transparent 45px
+      );
+  }
+
+  .vignette {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    background:
+      radial-gradient(
+        circle at center,
+        transparent 35%,
+        rgba(0, 0, 0, 0.72) 110%
+      );
+  }
+
+  header {
+    position: absolute;
+    z-index: 500;
+    top: 34px;
+    left: 42px;
+    right: 42px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .brand {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.15rem;
+    letter-spacing: 0.36em;
+  }
+
+  .subbrand {
+    margin-top: 10px;
+
+    color: #7e8b91;
+
+    font-size: 0.62rem;
+    letter-spacing: 0.28em;
+  }
+
+  .prototype {
+    color: #9d9878;
+    font-size: 0.58rem;
+    letter-spacing: 0.28em;
+  }
+
+  .work {
+    position: relative;
+    min-height: 100svh;
+  }
+
+  .section-label {
+    position: absolute;
+    z-index: 300;
+
+    top: 118px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    color: #b9b181;
+
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.35em;
+  }
+
+  .scene {
+    position: absolute;
+
+    inset: 145px 0 105px;
+
+    perspective: 1350px;
+    perspective-origin: 50% 38%;
+
+    cursor: grab;
+    user-select: none;
+    touch-action: pan-y;
+  }
+
+  .scene.dragging {
+    cursor: grabbing;
+  }
+
+  .cylinder {
+    position: absolute;
+    inset: 0;
+
+    transform-style: preserve-3d;
+    transform: rotateX(-7deg) translateY(18px);
+    transform-origin: 50% 58%;
+  }
+
+  .card {
+    position: absolute;
+
+    top: 49%;
+    left: 50%;
+
+    width: min(650px, 43vw);
+    height: min(610px, 64vh);
+
+    overflow: hidden;
+
+    border: 1px solid rgba(184, 191, 184, 0.25);
+    border-radius: 2px;
+
+    background: #101a20;
+
+    transform-style: preserve-3d;
+    transform-origin: center;
+
+    transition:
+      transform 850ms cubic-bezier(0.18, 0.82, 0.18, 1),
+      opacity 700ms ease,
+      filter 700ms ease,
+      border-color 700ms ease,
+      box-shadow 700ms ease;
+
+    box-shadow:
+      0 30px 70px rgba(0, 0, 0, 0.45);
+  }
+
+  .card.active {
+    border-color: rgba(214, 205, 155, 0.48);
+
+    box-shadow:
+      0 45px 110px rgba(0, 0, 0, 0.7),
+      0 0 50px rgba(154, 164, 145, 0.07);
+  }
+
+  .visual,
+  .shade {
+    position: absolute;
+    inset: 0;
+  }
+
+  /*
+    Temporary project visuals.
+    Later these become your real GIS maps / project artwork.
+  */
+
+  .lava .visual {
+    background:
+      radial-gradient(
+        circle at 72% 48%,
+        rgba(234, 88, 39, 0.9),
+        transparent 5%
+      ),
+      radial-gradient(
+        circle at 70% 52%,
+        rgba(181, 45, 24, 0.65),
+        transparent 20%
+      ),
+      linear-gradient(
+        125deg,
+        #07141b 5%,
+        #152d34 40%,
+        #4c251c 72%,
+        #121516 100%
+      );
+  }
+
+  .marsh .visual {
+    background:
+      radial-gradient(
+        ellipse at 70% 60%,
+        #49684d 0%,
+        #253f38 24%,
+        transparent 48%
+      ),
+      linear-gradient(
+        140deg,
+        #12252d,
+        #31453b 50%,
+        #172128
+      );
+  }
+
+  .lands .visual {
+    background:
+      linear-gradient(
+        165deg,
+        #4d4738 0%,
+        #293328 35%,
+        #17251f 70%,
+        #0d1515
+      );
+  }
+
+  .habitat .visual {
+    background:
+      radial-gradient(
+        circle at 60% 35%,
+        #394b3d,
+        transparent 30%
+      ),
+      linear-gradient(
+        135deg,
+        #16231d,
+        #23382d 50%,
+        #101919
+      );
+  }
+
+  .drone .visual {
+    background:
+      linear-gradient(
+        150deg,
+        #263943,
+        #13232b 42%,
+        #0c1419
+      );
+  }
+
+  .placeholderSix .visual {
+    background:
+      radial-gradient(circle at 68% 38%, #5a5440, transparent 28%),
+      linear-gradient(145deg, #24343a, #27352e 48%, #101719);
+  }
+
+  .placeholderSeven .visual {
+    background:
+      radial-gradient(circle at 62% 42%, #55452f, transparent 30%),
+      linear-gradient(145deg, #25323a, #31352b 48%, #111719);
+  }
+
+  .placeholderEight .visual {
+    background:
+      radial-gradient(circle at 66% 40%, #4b5846, transparent 30%),
+      linear-gradient(145deg, #24343b, #30382f 48%, #101719);
+  }
+
+  .placeholderNine .visual {
+    background:
+      radial-gradient(circle at 64% 40%, #514b39, transparent 30%),
+      linear-gradient(145deg, #26353b, #34372e 48%, #101719);
+  }
+
+  .shade {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(5, 10, 13, 0.93) 0%,
+        rgba(5, 10, 13, 0.65) 44%,
+        rgba(5, 10, 13, 0.08) 100%
+      );
+  }
+
+  .content {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 42px;
+  }
+
+  .number {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.55rem;
+    letter-spacing: 0.08em;
+  }
+
+  .card-bottom {
+    margin-top: auto;
+    max-width: 78%;
+  }
+
+  .location {
+    margin-bottom: 8px;
+
+    color: #c3ba82;
+
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+  }
+
+  h2 {
+    margin: 0;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2rem, 3vw, 3.4rem);
+    font-weight: 400;
+
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+  }
+
+  .rule {
+    width: 38px;
+    height: 1px;
+
+    margin: 23px 0 16px;
+
+    background: #c5bb7c;
+  }
+
+  p {
+    margin: 0;
+
+    color: #aeb6b5;
+
+    font-size: 0.72rem;
+    line-height: 1.65;
+  }
+
+  .view {
+    margin-top: 27px;
+
+    color: #ded9be;
+
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.19em;
+  }
+
+  .floor {
+    position: absolute;
+
+    width: 1350px;
+    height: 360px;
+
+    left: 50%;
+    bottom: -235px;
+
+    transform:
+      translateX(-50%)
+      rotateX(68deg);
+
+    border: 1px solid rgba(176, 176, 142, 0.2);
+    border-radius: 50%;
+
+    box-shadow:
+      inset 0 0 80px rgba(133, 143, 123, 0.06);
+  }
+
+  .controls {
+    position: absolute;
+    z-index: 400;
+
+    bottom: 50px;
+    left: 50%;
+
+    display: flex;
+    align-items: center;
+    gap: 28px;
+
+    transform: translateX(-50%);
+  }
+
+  .controls > button {
+    width: 40px;
+    height: 40px;
+
+    border: 0;
+    background: transparent;
+
+    color: #d7d6cc;
+
+    font-size: 1.4rem;
+
+    cursor: pointer;
+  }
+
+  .dots {
+    display: flex;
+    gap: 12px;
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+
+    padding: 0;
+
+    border: 0;
+    border-radius: 50%;
+
+    background: #465057;
+
+    cursor: pointer;
+
+    transition:
+      transform 300ms ease,
+      background 300ms ease;
+  }
+
+  .dot.active {
+    transform: scale(1.35);
+    background: #ded9bd;
+  }
+
+  .instruction {
+    position: absolute;
+
+    right: 42px;
+    bottom: 58px;
+
+    color: #6f7a7f;
+
+    font-size: 0.56rem;
+    letter-spacing: 0.25em;
+  }
+
+  @media (max-width: 850px) {
+    header {
+      top: 24px;
+      left: 22px;
+      right: 22px;
+    }
+
+    .subbrand,
+    .prototype {
+      display: none;
+    }
+
+    .brand {
+      font-size: 0.9rem;
+    }
+
+    .section-label {
+      top: 88px;
+    }
+
+    .scene {
+      inset: 110px 0 100px;
+      perspective: 1050px;
+      perspective-origin: 50% 36%;
+    }
+
+    .card {
+      width: min(78vw, 540px);
+      height: min(62vh, 600px);
+    }
+
+    .content {
+      padding: 28px;
+    }
+
+    .card-bottom {
+      max-width: 90%;
+    }
+
+    .instruction {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card {
+      transition-duration: 0.01ms;
+    }
+  }
+
+  /* Consolidated visual layers: source order preserved. */
+.card.lava { cursor: pointer; }
+  .card.lava .hawaii-v7-frame { position:absolute;inset:0;width:100%;height:100%;border:0;pointer-events:none;display:block; }
+  .card.lava .lava-original-hidden { display:none; }
+
+  /* Consolidated visual layers: source order preserved. */
+/* SPATIALGROUND RICHAT BRIGHT V2: visual overrides only. Ring transforms untouched. */
+.stage {
+  background: #b99777 url('/images/richat-bright-v2.jpg') center 48% / cover no-repeat !important;
+}
+.topography { opacity: 0.035 !important; pointer-events: none; }
+.vignette {
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(17,23,29,.26) 0%, rgba(25,23,20,.16) 36%, rgba(35,29,24,.26) 73%, rgba(19,22,25,.40) 100%),
+    radial-gradient(ellipse at 50% 50%, rgba(24,24,24,.08) 0%, rgba(21,21,24,.12) 64%, rgba(14,18,23,.29) 100%) !important;
+}
+/* Khaki / Earth Charcoal: future cards 06–09 */
+.placeholderSix, .placeholderSeven, .placeholderEight, .placeholderNine {
+  background: #756c5d !important;
+  border-color: rgba(235,213,173,.48) !important;
+}
+.placeholderSix .visual, .placeholderSeven .visual, .placeholderEight .visual, .placeholderNine .visual {
+  background: linear-gradient(145deg, rgba(215,187,145,.60), rgba(143,129,105,.72) 46%, rgba(80,78,70,.95)),
+    repeating-linear-gradient(28deg, transparent 0 22px, rgba(240,220,182,.07) 23px 24px) !important;
+}
+.placeholderSix .shade, .placeholderSeven .shade, .placeholderEight .shade, .placeholderNine .shade {
+  background: linear-gradient(180deg, rgba(40,39,35,.05), rgba(29,30,29,.26) 48%, rgba(19,23,24,.75)) !important;
+}
+.placeholderSix .location, .placeholderSeven .location, .placeholderEight .location, .placeholderNine .location {color:#e9d5ae !important;}
+/* Clearly distinguish unreleased projects, without changing card sizes. */
+.card:not(.lava) .view {color:#f0d5a6; letter-spacing:.18em;}
+.card:not(.lava) {cursor:grab;}
+/* Keep controls legible on the bright desert. */
+.brand, .section-label {text-shadow:0 2px 12px rgba(0,0,0,.75);}
+.subbrand, .prototype, .instruction {color:#e1d6c2 !important; text-shadow:0 1px 7px rgba(0,0,0,.9);}
+.controls {filter:drop-shadow(0 2px 6px rgba(0,0,0,.8));}
+</style>

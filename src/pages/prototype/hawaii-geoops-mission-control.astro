@@ -1,0 +1,164 @@
+---
+import "../../styles/hawaii-geoops-mission-control.css";
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0a0f12" />
+  <meta name="description" content="GeoOps mission-control prototype for the Hawaiʻi lava-risk GIS portfolio case study." />
+  <title>Hawaiʻi Lava Risk — GeoOps Mission Control</title>
+  <script src="/hawaii-geoops/geoops.js" defer></script>
+</head>
+<body class="geoops-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="ops-header">
+    <a class="ops-brand" href="#top"><span class="pulse-dot"></span><strong>SpatialGround</strong></a>
+    <div class="ops-status"><span>PROTOTYPE 04</span><b>GEOOPS / HAWAIʻI</b></div>
+  </header>
+
+  <main id="main">
+    <section class="command-hero" id="top">
+      <div class="hero-map" aria-hidden="true"><img src="/lava-risk/assets/main-map.jpg" alt="" /></div>
+      <div class="hero-shade"></div>
+      <div class="geo-grid" aria-hidden="true"></div>
+      <div class="scan-line" aria-hidden="true"></div>
+
+      <div class="hero-console reveal">
+        <p class="sys-label">CASE STUDY / HAZARD SCREENING</p>
+        <h1>HAWAIʻI<br /><span>LAVA RISK</span></h1>
+        <p class="hero-deck">A parcel-level GIS analysis reframed as a geospatial operations brief: orient, isolate, verify, and hand the evidence to the next planning question.</p>
+        <div class="hero-actions">
+          <a href="#ops-board">Open analysis board <span>↘</span></a>
+          <a href="#method">Review method</a>
+        </div>
+      </div>
+
+      <aside class="hero-readout reveal" aria-label="Project readout">
+        <div class="readout-head"><span>ANALYSIS READOUT</span><i>01</i></div>
+        <dl>
+          <div><dt>Parcel features</dt><dd>135,471</dd></div>
+          <div><dt>Zones 1 or 2</dt><dd>24,528</dd></div>
+          <div><dt>Zone 1 subset</dt><dd>4,183</dd></div>
+          <div><dt>Share of total</dt><dd>3.1%</dd></div>
+        </dl>
+        <p class="readout-note"><span></span>Screening result, not a damage forecast.</p>
+      </aside>
+
+      <div class="hero-footer reveal">
+        <span>HAWAIʻI ISLAND</span><span>PARCEL × HAZARD</span><span>GIS + INTERPRETATION</span>
+      </div>
+    </section>
+
+    <section class="ops-board" id="ops-board">
+      <div class="ops-intro reveal">
+        <div><p class="sys-label accent">ANALYSIS BOARD</p><h2>One project.<br />Three operational views.</h2></div>
+        <p>Switch the evidence layer without shrinking the map into a card. The surrounding interface explains what the view answers—and what it does not.</p>
+      </div>
+
+      <div class="board-shell reveal" data-ops-board>
+        <div class="board-toolbar">
+          <div class="toolbar-left"><span class="pulse-dot"></span><strong>HAZARD VIEWER</strong><em>STATIC ANALYSIS OUTPUT</em></div>
+          <div class="toolbar-right"><span>EPSG:3750</span><span>HAWAIʻI</span><span>CASE 01</span></div>
+        </div>
+
+        <div class="board-grid">
+          <nav class="layer-rail" aria-label="Analysis view">
+            <button class="active" type="button" data-ops-target="overview" aria-pressed="true"><span>01</span><b>Overview</b><small>Island orientation</small></button>
+            <button type="button" data-ops-target="risk" aria-pressed="false"><span>02</span><b>Highest risk</b><small>Zones 1 &amp; 2</small></button>
+            <button type="button" data-ops-target="infrastructure" aria-pressed="false"><span>03</span><b>Infrastructure</b><small>Planning context</small></button>
+          </nav>
+
+          <div class="map-stage" aria-live="polite">
+            <figure class="ops-map active" data-ops-view="overview">
+              <img src="/lava-risk/assets/main-map.jpg" alt="Overview map of Hawaiʻi Island parcel and lava-flow hazard analysis" />
+              <figcaption><span>VIEW 01</span><strong>Island orientation</strong><em>Start with the spatial relationship between parcels and mapped lava-flow hazard zones.</em></figcaption>
+            </figure>
+            <figure class="ops-map" data-ops-view="risk">
+              <img src="/lava-risk/assets/high-risk-map.jpg" alt="High-risk parcel map focused on lava-flow hazard zones" />
+              <figcaption><span>VIEW 02</span><strong>Highest-risk screen</strong><em>Separate the Zone 1 subset from the broader Zones 1-or-2 exposure screen.</em></figcaption>
+            </figure>
+            <figure class="ops-map" data-ops-view="infrastructure">
+              <img src="/lava-risk/assets/infrastructure-map.jpg" alt="Infrastructure context map for Hawaiʻi Island" />
+              <figcaption><span>VIEW 03</span><strong>Planning context</strong><em>Use infrastructure as the bridge from exposure mapping to follow-up planning questions.</em></figcaption>
+            </figure>
+            <div class="map-crosshair" aria-hidden="true"></div>
+          </div>
+
+          <aside class="intel-rail">
+            <section data-intel="overview" class="intel active">
+              <p>VIEW OBJECTIVE</p><h3>Orient</h3><span>Understand the island-wide analysis before narrowing the question.</span>
+            </section>
+            <section data-intel="risk" class="intel">
+              <p>VIEW OBJECTIVE</p><h3>Isolate</h3><span>Focus attention on parcel features intersecting the highest long-term hazard classes.</span>
+            </section>
+            <section data-intel="infrastructure" class="intel">
+              <p>VIEW OBJECTIVE</p><h3>Hand off</h3><span>Move from exposure evidence toward access, assets, community context, and preparedness.</span>
+            </section>
+            <div class="intel-fixed"><p>STATUS</p><strong>ANALYTICAL SCREEN</strong><small>Not population exposure<br />Not loss estimation<br />Not eruption prediction</small></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="metric-wall">
+      <div class="metric-heading reveal"><p class="sys-label accent">EVIDENCE SIGNAL</p><h2>The numbers are the interface.</h2></div>
+      <div class="metric-grid">
+        <article class="metric-card reveal"><span>01 / TOTAL</span><strong>135,471</strong><p>parcel features analyzed</p></article>
+        <article class="metric-card hot reveal"><span>02 / ZONES 1+2</span><strong>24,528</strong><p>parcel features intersect the two highest hazard zones</p></article>
+        <article class="metric-card reveal"><span>03 / ZONE 1</span><strong>4,183</strong><p>parcel features in the highest-risk subset</p></article>
+        <article class="metric-card cool reveal"><span>04 / SHARE</span><strong>3.1%</strong><p>of all analyzed parcel features</p></article>
+      </div>
+    </section>
+
+    <section class="method-section" id="method">
+      <div class="method-copy reveal">
+        <p class="sys-label accent">ANALYTICAL PIPELINE</p>
+        <h2>Show the work<br />without showing every click.</h2>
+        <p>A hiring reviewer should be able to understand the logic of the GIS workflow in seconds, then dive deeper only if they want to.</p>
+      </div>
+      <ol class="pipeline" aria-label="GIS workflow">
+        <li class="reveal"><span>01</span><div><b>Compile</b><p>Parcel geometry + lava-flow hazard zones.</p></div><i>→</i></li>
+        <li class="reveal"><span>02</span><div><b>Align</b><p>Maintain analysis in Hawaiʻi State Plane, EPSG:3750.</p></div><i>→</i></li>
+        <li class="reveal"><span>03</span><div><b>Intersect</b><p>Select parcel features touching Zones 1 or 2.</p></div><i>→</i></li>
+        <li class="reveal"><span>04</span><div><b>Separate</b><p>Build a distinct subset for Zone 1.</p></div><i>→</i></li>
+        <li class="reveal"><span>05</span><div><b>Verify</b><p>Recheck counts, identifiers, connections, and outputs.</p></div></li>
+      </ol>
+    </section>
+
+    <section class="boundary-section">
+      <div class="boundary-map reveal"><img src="/lava-risk/assets/high-risk-map.jpg" alt="High-risk parcel analysis map" /></div>
+      <div class="boundary-copy reveal">
+        <p class="sys-label accent">ANALYSIS BOUNDARY</p>
+        <h2>Precision includes knowing where the analysis stops.</h2>
+        <div class="boundary-list">
+          <article><span>MEASURED</span><p>Parcel features intersecting Zones 1 or 2, including a separate Zone 1 subset.</p></article>
+          <article><span>NOT MEASURED</span><p>Population exposure, structure loss, financial loss, route adequacy, or eruption timing.</p></article>
+          <article><span>NEXT PASS</span><p>Road access, structures, critical facilities, community characteristics, and locally defined priorities.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="handoff-section">
+      <div class="handoff-head reveal"><p class="sys-label accent">PLANNING HANDOFF</p><h2>Turn a map result into the next decision.</h2></div>
+      <div class="handoff-grid">
+        <article class="reveal"><span>01</span><h3>Exposure</h3><p>Where are the parcel features intersecting the highest long-term hazard zones?</p></article>
+        <article class="reveal"><span>02</span><h3>Access</h3><p>Where do road networks and travel constraints warrant closer examination?</p></article>
+        <article class="reveal"><span>03</span><h3>Assets</h3><p>Which structures and critical facilities should enter the next layer of analysis?</p></article>
+        <article class="reveal"><span>04</span><h3>Community</h3><p>Which locally defined priorities and population characteristics should shape interpretation?</p></article>
+      </div>
+    </section>
+
+    <section class="capability-section">
+      <div class="capability-copy reveal"><p class="sys-label accent">PORTFOLIO SIGNAL</p><h2>Technical analysis.<br />Operational communication.</h2><p>This direction is meant to read less like a magazine feature and more like the work product of someone who can support hazard, planning, and geospatial decision workflows.</p></div>
+      <div class="capability-stack reveal" aria-label="Capabilities demonstrated">
+        <span>GIS ANALYSIS</span><span>DATA QA</span><span>CARTOGRAPHY</span><span>HAZARD COMMUNICATION</span><span>PLANNING</span><span>POLICY TRANSLATION</span>
+      </div>
+    </section>
+  </main>
+
+  <a class="back-float" href="/#selected-work" aria-label="Back to Selected Work"><span>←</span><strong>Back to Selected Work</strong></a>
+</body>
+</html>

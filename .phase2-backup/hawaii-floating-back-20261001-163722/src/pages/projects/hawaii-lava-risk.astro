@@ -1,0 +1,173 @@
+---
+import "../../styles/lava-risk.css";
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0b0c">
+  <meta name="description" content="A GIS-based decision-support case study examining parcel exposure to lava-flow hazard zones on Hawaiʻi Island.">
+  <title>Lava-Flow Risk on Hawaiʻi Island — Chi Ho</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0b0c'/%3E%3Cpath d='M8 49 27 16l8 17 6-9 15 25Z' fill='%23f05a28'/%3E%3Cpath d='M27 16l2 19 6-2Z' fill='%23ffb45d'/%3E%3C/svg%3E">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="topbar">
+    <a class="brand" href="#overview" aria-label="Hawaiʻi lava risk case study home">
+      <span class="brand-mark" aria-hidden="true">▲</span>
+      <span>LAVA / LAND / POLICY</span>
+    </a>
+    <button class="menu-button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" aria-label="Primary navigation">
+      <a href="#context">Context</a>
+      <a href="#methods">Methods</a>
+      <a href="#findings">Findings</a>
+      <a href="#warnings">Warnings</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="overview">
+      <div class="hero-map" role="img" aria-label="Original GIS map of parcel exposure to lava-flow hazard zones on Hawaiʻi Island"></div>
+      <div class="hero-scrim"></div>
+      <div class="hero-content">
+        <p class="eyebrow">GIS + Environmental Policy Case Study</p>
+        <h1>Lava-Flow Risk,<br><span>Community Exposure</span><br>& Hazard-Mitigation Policy</h1>
+        <p class="dek">A decision-support case study for land-use planners, emergency managers, and community stakeholders on Hawaiʻi Island.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#findings">Explore the analysis</a>
+          <a class="button button-ghost" href="#methods">View methods</a>
+        </div>
+      </div>
+      <aside class="hero-note">
+        <span class="pulse" aria-hidden="true"></span>
+        <div><strong>2025 analysis</strong><br>Long-term hazard screening—not an eruption forecast</div>
+      </aside>
+    </section>
+
+    <section class="stats" aria-label="Key analysis figures">
+      <article><span class="stat-number" data-value="135471">135,471</span><p>parcel features analyzed</p></article>
+      <article><span class="stat-number accent" data-value="24528">24,528</span><p>intersecting Zones 1 or 2</p><small>18.1% of analyzed features</small></article>
+      <article><span class="stat-number hot" data-value="4183">4,183</span><p>intersecting Zone 1</p><small>3.1% of analyzed features</small></article>
+      <p class="stats-note">Counts represent parcel features—not population, structures, households, or unique owners.</p>
+    </section>
+
+    <section class="split-section" id="context">
+      <div class="section-copy sticky-copy">
+        <p class="section-index">01 / HAZARD CONTEXT</p>
+        <h2>An island shaped by active volcanism</h2>
+        <p>Hawaiʻi Island is formed by five volcanoes: Kohala, Mauna Kea, Hualālai, Mauna Loa, and Kīlauea. The USGS lava-flow hazard map divides the island into nine zones based on relative long-term hazard.</p>
+        <p>Zone 1 includes the summits and rift zones of Kīlauea and Mauna Loa. Zone 2 generally includes areas adjacent to and downslope of active rift zones.</p>
+        <div class="definition">
+          <span>Essential interpretation</span>
+          <p>Hazard zones are not evacuation zones, parcel-specific risk determinations, or predictions of the next eruption.</p>
+        </div>
+      </div>
+      <div class="map-stage" aria-label="Map explorer">
+        <div class="map-toolbar" role="tablist" aria-label="Select map view">
+          <button class="map-tab active" role="tab" aria-selected="true" data-map="main-map.jpg" data-caption="Original 2025 parcel-risk overview">Parcel exposure</button>
+          <button class="map-tab" role="tab" aria-selected="false" data-map="high-risk-map.jpg" data-caption="Zones 1 and 2 analytical view">Zones 1 & 2</button>
+          <button class="map-tab" role="tab" aria-selected="false" data-map="infrastructure-map.jpg" data-caption="Exploratory infrastructure context">Infrastructure</button>
+        </div>
+        <button class="map-frame" aria-label="Open current map at full size">
+          <img id="map-image" src="/lava-risk/assets/main-map.jpg" alt="Original 2025 GIS map showing parcel exposure and lava-flow hazard zones on Hawaiʻi Island">
+          <span class="expand-label">Open full map ↗</span>
+        </button>
+        <div class="map-meta">
+          <span id="map-caption">Original 2025 parcel-risk overview</span>
+          <span>Student GIS output · Reframed for web</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="methods" id="methods">
+      <div class="section-heading">
+        <p class="section-index">02 / METHODS</p>
+        <h2>A transparent spatial-intersection workflow</h2>
+        <p>How many Hawaiʻi County parcel features intersect USGS Lava-Flow Hazard Zones 1 and 2?</p>
+      </div>
+      <ol class="workflow">
+        <li><span>01</span><h3>Compile</h3><p>County parcel geometry and lava-flow hazard-zone polygons.</p></li>
+        <li><span>02</span><h3>Align</h3><p>Maintain analysis in Hawaiʻi State Plane, EPSG:3750.</p></li>
+        <li><span>03</span><h3>Intersect</h3><p>Select parcel features whose geometries touch Zones 1 or 2.</p></li>
+        <li><span>04</span><h3>Separate</h3><p>Create a second subset for features intersecting Zone 1.</p></li>
+        <li><span>05</span><h3>Verify</h3><p>Recheck counts, identifiers, layer connections, and outputs.</p></li>
+      </ol>
+      <div class="method-note">
+        <strong>Method boundary</strong>
+        <p>An intersection does not mean an entire parcel lies inside one hazard zone. USGS boundaries are generalized, and some parcel geometries cross a zone boundary.</p>
+      </div>
+    </section>
+
+    <section class="findings" id="findings">
+      <div class="section-heading light">
+        <p class="section-index">03 / KEY FINDINGS</p>
+        <h2>Nearly one in five parcel features intersected Zones 1 or 2</h2>
+      </div>
+      <div class="finding-grid">
+        <article class="finding-card major">
+          <div class="donut" style="--percent:18.1"><span>18.1<small>%</small></span></div>
+          <div><p class="kicker">Zones 1 or 2</p><h3>24,528 parcel features</h3><p>The scale of parcel geometry overlapping the island’s two highest long-term lava-flow hazard classifications.</p></div>
+        </article>
+        <article class="finding-card">
+          <div class="donut orange" style="--percent:3.1"><span>3.1<small>%</small></span></div>
+          <div><p class="kicker">Zone 1</p><h3>4,183 parcel features</h3><p>A subset of the 24,528 features above—not an additional count.</p></div>
+        </article>
+      </div>
+      <div class="not-mean">
+        <h3>What these findings do not mean</h3>
+        <ul>
+          <li>24,528 homes or households</li>
+          <li>The number of residents exposed</li>
+          <li>The probability of an eruption in a particular year</li>
+          <li>Equal hazard across every part of an intersecting parcel</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="warnings" id="warnings">
+      <div class="section-heading">
+        <p class="section-index">04 / MONITORING & WARNINGS</p>
+        <h2>Three kinds of information. Three different decisions.</h2>
+      </div>
+      <div class="warning-grid">
+        <article><span class="badge">LONG TERM</span><h3>Hazard zones</h3><p>Where is relative lava-flow hazard higher or lower over the long term?</p><strong>Use:</strong> planning, screening, and public education.</article>
+        <article><span class="badge live">OFFICIAL STATUS</span><h3>Monitoring & alerts</h3><p>What are USGS and emergency-management agencies reporting now?</p><strong>Use:</strong> current conditions and official instructions.</article>
+        <article><span class="badge scenario">HYPOTHETICAL</span><h3>Planning scenarios</h3><p>How might a defined event affect evacuation, roads, or services?</p><strong>Use:</strong> preparedness exercises—not forecasting.</article>
+      </div>
+      <div class="official-links">
+        <div>
+          <p class="kicker">Current information</p>
+          <h3>Follow the responsible agencies</h3>
+          <p>This portfolio is an analytical case study, not an emergency-notification service.</p>
+        </div>
+        <div class="link-list">
+          <a href="https://www.usgs.gov/observatories/hvo" target="_blank" rel="noreferrer">USGS Hawaiian Volcano Observatory <span>↗</span></a>
+          <a href="https://www.hawaiicounty.gov/departments/civil-defense" target="_blank" rel="noreferrer">Hawaiʻi County Civil Defense <span>↗</span></a>
+          <a href="https://dod.hawaii.gov/hiema/all-hazard-statewide-outdoor-warning-siren-system/" target="_blank" rel="noreferrer">Hawaiʻi Emergency Management Agency <span>↗</span></a>
+        </div>
+      </div>
+      <blockquote>Planning scenario—not an eruption forecast. A scenario illustration is for preparedness analysis and does not predict the location, timing, or extent of a future lava flow.</blockquote>
+    </section>
+
+    <section class="next-section">
+      <p class="section-index">NEXT PHASE</p>
+      <h2>From exposure mapping to policy choices</h2>
+      <p>The next site version will compare land-use planning, evacuation capacity, infrastructure analysis, warning access, community engagement, and voluntary long-term risk reduction.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div><strong>Chi Ho</strong><br>MS Environmental Policy & Management · Graduate Certificate in GIS</div>
+    <div>Parcel statistics: 2025 GIS analysis<br>Site draft: September 2026</div>
+  </footer>
+
+  <dialog id="map-dialog">
+    <button class="dialog-close" aria-label="Close map">×</button>
+    <img id="dialog-image" src="/lava-risk/assets/main-map.jpg" alt="Expanded GIS map">
+    <p id="dialog-caption">Original 2025 parcel-risk overview</p>
+  </dialog>
+  <script is:inline src="/lava-risk/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+---
+import "../../styles/hawaii-fusion-case-study.css";
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b0c0d" />
+  <meta name="description" content="Experimental fusion layout for the Hawaiʻi lava-risk GIS portfolio case study." />
+  <title>Hawaiʻi Lava Risk — Fusion Portfolio Prototype</title>
+  <script src="/hawaii-fusion/fusion.js" defer></script>
+</head>
+<body class="fusion-page">
+  <a class="skip-link" href="#fusion-main">Skip to content</a>
+
+  <header class="fusion-nav" aria-label="Prototype navigation">
+    <a class="fusion-brand" href="#top"><span class="brand-dot"></span>SpatialGround / Case Study Lab</a>
+    <span class="prototype-tag">FUSION PROTOTYPE</span>
+  </header>
+
+  <main id="fusion-main">
+    <section class="fusion-hero" id="top">
+      <div class="hero-map" aria-hidden="true">
+        <img src="/lava-risk/assets/main-map.jpg" alt="" />
+      </div>
+      <div class="hero-vignette"></div>
+      <div class="hero-copy reveal">
+        <p class="eyebrow">GIS · Hazard Planning · Environmental Policy</p>
+        <h1>Lava risk becomes useful<br />when the map leads to a decision.</h1>
+        <p class="hero-dek">A portfolio case study connecting parcel-level spatial screening on Hawaiʻi Island with hazard communication, planning questions, and transparent analytical limits.</p>
+        <div class="hero-actions">
+          <a href="#evidence" class="btn primary">Follow the evidence</a>
+          <a href="#methods" class="btn ghost">See the workflow</a>
+        </div>
+      </div>
+      <div class="hero-dossier reveal" aria-label="Project summary">
+        <div><span>Study</span><strong>Hawaiʻi Island</strong></div>
+        <div><span>Analysis</span><strong>Parcel × hazard zones</strong></div>
+        <div><span>Role</span><strong>GIS + policy translation</strong></div>
+        <div><span>Output</span><strong>Decision-support case study</strong></div>
+      </div>
+      <div class="scroll-cue" aria-hidden="true"><span></span>Scroll to examine</div>
+    </section>
+
+    <section class="skim-strip" aria-label="Case study summary">
+      <article class="reveal"><span>QUESTION</span><strong>Where does parcel geometry intersect the island’s highest long-term lava-flow hazard zones?</strong></article>
+      <article class="reveal"><span>METHOD</span><strong>Spatial intersection with a separate Zone 1 subset and QA review.</strong></article>
+      <article class="reveal"><span>RESULT</span><strong>24,528 parcel features intersected Zones 1 or 2; 4,183 intersected Zone 1.</strong></article>
+      <article class="reveal"><span>VALUE</span><strong>Screening evidence for follow-up planning—not an eruption forecast.</strong></article>
+    </section>
+
+    <section class="atlas-intro" id="evidence">
+      <div class="atlas-copy reveal">
+        <p class="section-index">01 / EVIDENCE FIRST</p>
+        <h2>Let the GIS output occupy the page when the map is the evidence.</h2>
+        <p>This fusion layout does not keep every map trapped in a half-width column. The original analytical map is shown at atlas scale first, with interpretation placed around—not over—the evidence.</p>
+      </div>
+      <figure class="atlas-map reveal">
+        <div class="map-paper">
+          <img src="/lava-risk/assets/main-map.jpg" alt="Original 2025 GIS parcel and lava-flow hazard analysis map for Hawaiʻi Island" />
+        </div>
+        <figcaption>
+          <span>Original project output · 2025 analysis</span>
+          <span>Parcel features × USGS lava-flow hazard zones</span>
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="stat-band" aria-label="Verified analytical results">
+      <div class="stat-lead reveal">
+        <span class="section-index">VERIFIED RESULTS</span>
+        <h2>Three numbers anchor the story.</h2>
+        <p>Counts refer to parcel features, not population, structures, households, or unique owners.</p>
+      </div>
+      <div class="stat-grid">
+        <article class="reveal"><strong>135,471</strong><span>parcel features analyzed</span></article>
+        <article class="reveal hot"><strong>24,528</strong><span>intersecting Zones 1 or 2</span><small>18.1%</small></article>
+        <article class="reveal"><strong>4,183</strong><span>intersecting Zone 1</span><small>3.1%</small></article>
+      </div>
+    </section>
+
+    <section class="methods-shell" id="methods">
+      <div class="methods-heading reveal">
+        <p class="section-index">02 / METHODS AS A WORKFLOW</p>
+        <h2>Show the analytical chain, not just the finished map.</h2>
+        <p>A hiring reviewer can skim the method in seconds, while a technical reviewer can see the decisions behind the result.</p>
+      </div>
+      <ol class="workflow-grid">
+        <li class="reveal"><span>01</span><h3>Compile</h3><p>Parcel geometry and lava-flow hazard-zone polygons.</p></li>
+        <li class="reveal"><span>02</span><h3>Align</h3><p>Maintain the analysis in Hawaiʻi State Plane, EPSG:3750.</p></li>
+        <li class="reveal"><span>03</span><h3>Intersect</h3><p>Select parcel features whose geometries touch Zones 1 or 2.</p></li>
+        <li class="reveal"><span>04</span><h3>Separate</h3><p>Create a second subset for features intersecting Zone 1.</p></li>
+        <li class="reveal"><span>05</span><h3>Verify</h3><p>Recheck counts, identifiers, connections, and outputs.</p></li>
+      </ol>
+      <aside class="method-boundary reveal"><strong>Analytical boundary</strong><p>An intersecting parcel is not automatically fully inside one hazard zone. This case study treats the result as screening-level evidence.</p></aside>
+    </section>
+
+    <section class="scrolly-shell" aria-label="Scroll-driven map interpretation">
+      <div class="scrolly-stage" aria-hidden="true">
+        <div class="scrolly-map-wrap">
+          <img class="scrolly-map active" data-map="overview" src="/lava-risk/assets/main-map.jpg" alt="" />
+          <img class="scrolly-map" data-map="zones" src="/lava-risk/assets/high-risk-map.jpg" alt="" />
+          <img class="scrolly-map" data-map="infrastructure" src="/lava-risk/assets/infrastructure-map.jpg" alt="" />
+          <div class="map-shade"></div>
+          <div class="map-state-label"><span>MAP STATE</span><strong id="map-state-title">Island overview</strong></div>
+        </div>
+      </div>
+
+      <div class="scrolly-steps">
+        <article class="story-step active" data-map="overview" data-title="Island overview">
+          <span class="step-no">03.1</span>
+          <p class="step-kicker">ORIENT</p>
+          <figure class="mobile-step-map">
+            <a href="/lava-risk/assets/main-map.jpg" target="_blank" rel="noopener">
+              <img src="/lava-risk/assets/main-map.jpg" alt="Hawaiʻi Island lava-risk overview map" loading="lazy" />
+            </a>
+            <figcaption>Island overview · tap map for full resolution</figcaption>
+          </figure>
+          <h2>Start with the whole island.</h2>
+          <p>Establish the study area before asking the viewer to interpret exposure. The map remains dominant while the narrative introduces one analytical question at a time.</p>
+        </article>
+        <article class="story-step" data-map="zones" data-title="Zones 1 & 2">
+          <span class="step-no">03.2</span>
+          <p class="step-kicker">FOCUS</p>
+          <figure class="mobile-step-map">
+            <a href="/lava-risk/assets/high-risk-map.jpg" target="_blank" rel="noopener">
+              <img src="/lava-risk/assets/high-risk-map.jpg" alt="Parcels located in lava-flow hazard Zones 1 and 2" loading="lazy" />
+            </a>
+            <figcaption>Zones 1 &amp; 2 · tap map for full resolution</figcaption>
+          </figure>
+          <h2>Shift attention to the highest long-term hazard classifications.</h2>
+          <p>Zones 1 and 2 provide the screening frame. They describe relative long-term hazard—not the location or timing of the next eruption.</p>
+        </article>
+        <article class="story-step" data-map="overview" data-title="Parcel exposure" data-zoom="true">
+          <span class="step-no">03.3</span>
+          <p class="step-kicker">MEASURE</p>
+          <figure class="mobile-step-map">
+            <a href="/lava-risk/assets/main-map.jpg" target="_blank" rel="noopener">
+              <img src="/lava-risk/assets/main-map.jpg" alt="Hawaiʻi parcel exposure overview map" loading="lazy" />
+            </a>
+            <figcaption>Parcel exposure · tap map for full resolution</figcaption>
+          </figure>
+          <h2>Translate the hazard layer into an exposure question.</h2>
+          <p>24,528 parcel features intersected Zones 1 or 2. Of the full set analyzed, 4,183 intersected Zone 1.</p>
+        </article>
+        <article class="story-step" data-map="infrastructure" data-title="Planning context">
+          <span class="step-no">03.4</span>
+          <p class="step-kicker">HAND OFF</p>
+          <figure class="mobile-step-map">
+            <a href="/lava-risk/assets/infrastructure-map.jpg" target="_blank" rel="noopener">
+              <img src="/lava-risk/assets/infrastructure-map.jpg" alt="Critical infrastructure and lava hazard zones on Hawaiʻi Island" loading="lazy" />
+            </a>
+            <figcaption>Infrastructure context · tap map for full resolution</figcaption>
+          </figure>
+          <h2>Use GIS to identify the next planning questions.</h2>
+          <p>Infrastructure and access are presented here as follow-up planning context. The current parcel analysis does not claim route adequacy or facility exposure counts.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="interpretation-grid">
+      <div class="interpretation-heading reveal">
+        <p class="section-index">04 / INTERPRETATION</p>
+        <h2>Separate measured findings from what comes next.</h2>
+      </div>
+      <article class="interpret-card measured reveal">
+        <span>MEASURED</span>
+        <h3>What this analysis supports</h3>
+        <p>Parcel-feature counts, relative hazard-zone exposure, and prioritization for more detailed follow-up analysis.</p>
+      </article>
+      <article class="interpret-card not-measured reveal">
+        <span>NOT MEASURED</span>
+        <h3>What it does not establish</h3>
+        <p>Population exposure, structure loss, financial loss, route adequacy, or where and when the next eruption will occur.</p>
+      </article>
+      <article class="interpret-card next reveal">
+        <span>NEXT ANALYSIS</span>
+        <h3>Where the GIS can evolve</h3>
+        <p>Current roads, travel constraints, structures, critical facilities, population characteristics, and community-defined priorities.</p>
+      </article>
+    </section>
+
+    <section class="decision-section">
+      <div class="decision-copy reveal">
+        <p class="section-index">05 / FROM MAP TO DECISION</p>
+        <h2>A portfolio case study should show how spatial evidence enters planning.</h2>
+        <p>The strongest endpoint is not another decorative map. It is a clear handoff from verified GIS findings to questions an emergency manager, planner, or policy analyst could investigate next.</p>
+      </div>
+      <div class="decision-lenses">
+        <article class="reveal"><span>01</span><h3>Exposure</h3><p>Which parcel features intersect the highest long-term lava-flow hazard zones?</p></article>
+        <article class="reveal"><span>02</span><h3>Access</h3><p>Which road connections and essential services merit closer evaluation?</p></article>
+        <article class="reveal"><span>03</span><h3>Capacity</h3><p>Where may agencies or communities need more preparedness resources?</p></article>
+      </div>
+    </section>
+
+    <section class="skills-section">
+      <div class="skills-heading reveal">
+        <p class="section-index">CASE STUDY SIGNAL</p>
+        <h2>What this project demonstrates without turning into a résumé page.</h2>
+      </div>
+      <div class="skills-grid">
+        <div class="reveal"><span>GIS ANALYSIS</span><strong>Spatial intersection & exposure screening</strong></div>
+        <div class="reveal"><span>DATA QA</span><strong>Counts, identifiers, coordinate-system awareness</strong></div>
+        <div class="reveal"><span>CARTOGRAPHY</span><strong>Map-led evidence and visual hierarchy</strong></div>
+        <div class="reveal"><span>COMMUNICATION</span><strong>Technical limits explained for nontechnical readers</strong></div>
+        <div class="reveal"><span>PLANNING</span><strong>Findings translated into follow-up questions</strong></div>
+        <div class="reveal"><span>POLICY</span><strong>Long-term hazard separated from warnings and forecasting</strong></div>
+      </div>
+    </section>
+
+    <section class="prototype-close">
+      <p class="eyebrow">DESIGN TEST</p>
+      <h2>Cinematic opening. Scientific evidence. Editorial pacing. StoryMap interaction.</h2>
+      <p>This route is intentionally a prototype. Its purpose is to test whether a fusion design makes the Hawaiʻi case study feel more credible, more memorable, and more useful as a professional GIS portfolio piece.</p>
+    </section>
+  </main>
+
+  <a class="back-float" href="/#selected-work" aria-label="Back to Selected Work"><span>←</span><strong>Back to Selected Work</strong></a>
+</body>
+</html>

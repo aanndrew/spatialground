@@ -1,0 +1,45 @@
+---
+const title = "About — SpatialGround";
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content="The research and environmental GIS perspective behind SpatialGround." />
+</head>
+<body>
+  <main>
+    <nav><a href="/prototype/">← BACK TO SELECTED WORK</a><span>SPATIALGROUND</span></nav>
+    <section class="intro">
+      <p class="eyebrow">BEHIND SPATIALGROUND</p>
+      <h1>Mapping landscapes.<br/><em>Informing decisions.</em></h1>
+      <p class="lead">SpatialGround is a portfolio exploring environmental challenges through GIS, spatial analysis, natural resource management, and environmental policy.</p>
+      <div class="line"></div>
+      <h2>About the researcher</h2>
+      <p>My work connects geographic information systems with practical questions about natural hazards, conservation, and land management. I study Environmental Policy &amp; Management, with a focus on Natural Resource Management, at the University of Denver.</p>
+      <p>Selected projects examine lava-flow hazard exposure on Hawaiʻi Island, sea-level rise and marsh migration, and habitat suitability modeling. The goal is to turn spatial data into accessible analysis that supports informed environmental decisions.</p>
+      <a class="return" href="/prototype/">EXPLORE THE PROJECTS →</a>
+    </section>
+  </main>
+</body>
+</html>
+<style>
+  :global(*){box-sizing:border-box}
+  :global(html),:global(body){margin:0;min-height:100%;background:#171c1d;color:#f1eadc}
+  :global(body){font-family:Inter,ui-sans-serif,system-ui,sans-serif;background:linear-gradient(130deg,rgba(15,20,22,.90),rgba(22,25,25,.87)),url('/images/richat-bright-v2.jpg') center/cover fixed}
+  main{max-width:1100px;margin:auto;padding:35px clamp(24px,5vw,65px) 90px}
+  nav{display:flex;justify-content:space-between;gap:20px;align-items:center;font-size:.65rem;letter-spacing:.19em}
+  nav a,.return{color:#e4c894;text-decoration:none} nav span{font-family:Georgia,serif;letter-spacing:.32em}
+  a:hover{text-decoration:underline}a:focus-visible{outline:2px solid #e4c894;outline-offset:5px}
+  .intro{max-width:740px;margin:clamp(80px,13vh,160px) 0 0}
+  .eyebrow{font-size:.68rem;letter-spacing:.28em;color:#ddc391}
+  h1{font-family:Georgia,serif;font-size:clamp(2.6rem,6vw,5.2rem);font-weight:400;line-height:1.08;margin:24px 0}
+  h1 em{font-weight:400;color:#d8bb8b}
+  .lead{font-size:clamp(1.06rem,1.6vw,1.3rem);line-height:1.75;color:#e3dfd6}
+  .line{height:1px;background:rgba(227,202,158,.4);margin:45px 0 35px}
+  h2{font-family:Georgia,serif;font-size:1.8rem;font-weight:400}
+  p{line-height:1.85;color:#d4d0c7}
+  .return{display:inline-block;margin-top:32px;font-size:.7rem;letter-spacing:.17em}
+</style>

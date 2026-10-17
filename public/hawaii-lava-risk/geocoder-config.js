@@ -1,0 +1,1 @@
+window.SPATIALGROUND_ESRI_TOKEN = "";

@@ -1,0 +1,423 @@
+---
+import "../../styles/hawaii-lava-risk-v3-realmap-v5.css";
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b0c0d" />
+  <meta name="description" content="A GIS case study of lava-flow hazard exposure on Hawaiʻi Island, preserving the original 2025 analysis and extending it with a current-data Web GIS explorer framework." />
+  <title>Hawaiʻi Lava Risk — Content v3 Real Map Preview | SpatialGround</title>
+  <link rel="stylesheet" href="/hawaii-lava-v3-realmap-v5/vendor/maplibre/maplibre-gl.css" />
+  <script type="module" src="/hawaii-lava-v3-realmap-v5/site.js"></script>
+</head>
+<body class="hawaii-v2-page hawaii-v3-preview-page">
+  <a class="skip-link" href="#case-main">Skip to content</a>
+
+  <header class="fusion-nav nav-visible" aria-label="Project navigation">
+    <a class="fusion-brand" href="/" aria-label="SpatialGround home"><span class="brand-dot"></span>SpatialGround / Case Study</a>
+    <span class="preview-tag">REAL MAP PREVIEW V5</span>
+  </header>
+
+  <main id="case-main">
+    <section class="fusion-hero" id="top">
+      <div class="hero-map" aria-hidden="true">
+        <img src="/hawaii-lava-v3-realmap-v5/assets/main-map.jpg" alt="" draggable="false" />
+      </div>
+      <div class="hero-vignette"></div>
+      <div class="hero-copy reveal">
+        <p class="eyebrow">GIS · NATURAL HAZARDS · DECISION SUPPORT</p>
+        <h1>Lava risk becomes useful<br />when the map leads to a decision.</h1>
+        <p class="hero-dek">A GIS case study examining how lava-flow hazard zones intersect with land parcels and critical infrastructure on Hawaiʻi Island—and how spatial analysis can support planning, preparedness, and risk communication.</p>
+      </div>
+      <div class="hero-dossier reveal" aria-label="Project snapshot">
+        <div><span>Study</span><strong>Hawaiʻi Island</strong></div>
+        <div><span>Analysis</span><strong>Lava-flow hazard exposure</strong></div>
+        <div><span>Tools</span><strong>ArcGIS Pro · Spatial analysis</strong></div>
+        <div><span>Output</span><strong>Web GIS decision support</strong></div>
+      </div>
+      <div class="scroll-cue" aria-hidden="true"><span></span>Scroll to examine</div>
+    </section>
+
+    <section class="skim-strip" aria-label="Case study summary">
+      <article class="reveal"><span>QUESTION</span><strong>Where does long-term lava-flow hazard intersect with property and essential services?</strong></article>
+      <article class="reveal"><span>2025 ANALYSIS</span><strong>Parcel exposure + critical-infrastructure context in ArcGIS Pro.</strong></article>
+      <article class="reveal"><span>RESULT</span><strong>24,528 parcel features intersected Zones 1 or 2; 4,183 intersected Zone 1.</strong></article>
+      <article class="reveal"><span>EXTENSION</span><strong>A current-data Web GIS explorer for location-based spatial questions.</strong></article>
+    </section>
+
+    <section class="atlas-intro content-section" id="question">
+      <div class="atlas-copy reveal">
+        <p class="section-index">01 / THE QUESTION</p>
+        <h2>Where does long-term lava-flow hazard intersect with property and essential services?</h2>
+        <p>Volcanic hazard is not distributed evenly across Hawaiʻi Island. This project examines where parcel boundaries and critical infrastructure overlap the island’s highest long-term lava-flow hazard classifications.</p>
+        <p>The objective is not to predict the next eruption. It is to identify patterns of exposure that can support better questions about preparedness, infrastructure, land use, and risk communication.</p>
+        <aside class="plain-callout">This is an exposure analysis—not an eruption forecast.</aside>
+      </div>
+      <figure class="atlas-map reveal">
+        <div class="map-paper map-paper-badged">
+          <span class="map-vintage-badge">2025 ORIGINAL GIS ANALYSIS</span>
+          <img src="/hawaii-lava-v3-realmap-v5/assets/main-map.jpg" alt="Original 2025 Hawaiʻi Island lava-flow hazard and parcel exposure map" draggable="false" />
+        </div>
+        <figcaption>
+          <span>Original 2025 GIS analysis · static analytical map</span>
+          <span>Preserved as the historical project result</span>
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="hazard-context-section">
+      <div class="section-heading-wide reveal">
+        <p class="section-index">02 / HAZARD CONTEXT</p>
+        <h2>Long-term hazard, not a prediction of the next lava flow.</h2>
+        <p>The U.S. Geological Survey divides Hawaiʻi Island into nine lava-flow hazard zones representing relative long-term hazard. Zones 1 and 2 form the focus of this project.</p>
+      </div>
+      <div class="hazard-zone-grid">
+        <article class="hazard-zone-card reveal">
+          <span>ZONE 1</span>
+          <h3>Highest long-term hazard classification</h3>
+          <p>Areas associated most closely with the summit and active rift systems of Kīlauea and Mauna Loa.</p>
+        </article>
+        <article class="hazard-zone-card reveal">
+          <span>ZONE 2</span>
+          <h3>Adjacent and downslope exposure</h3>
+          <p>Areas adjacent to and downslope of active rift systems where lava originating in higher-hazard areas may travel.</p>
+        </article>
+      </div>
+      <div class="essential-interpretation reveal">
+        <span>ESSENTIAL INTERPRETATION</span>
+        <p>Hazard-zone boundaries are generalized. They are not evacuation boundaries, parcel-specific forecasts, or predictions of where the next eruption will occur.</p>
+      </div>
+    </section>
+
+    <section class="methods-shell" id="methods">
+      <div class="methods-heading reveal">
+        <p class="section-index">03 / THE 2025 GIS ANALYSIS</p>
+        <h2>Turn a regional hazard map into parcel-level questions.</h2>
+        <p>The original 2025 project combined public geospatial datasets in ArcGIS Pro: lava-flow hazard zones, parcels, terrain, volcano reference data, roads, hospitals, fire stations, and emergency shelters.</p>
+      </div>
+      <ol class="workflow-grid workflow-grid-four">
+        <li class="reveal"><span>01</span><h3>Assemble</h3><p>Combine hazard zones, parcel geometry, terrain, volcano reference data, and critical infrastructure.</p></li>
+        <li class="reveal"><span>02</span><h3>Overlay</h3><p>Identify parcel features intersecting Lava-Flow Hazard Zones 1 or 2.</p></li>
+        <li class="reveal"><span>03</span><h3>Quantify</h3><p>Summarize the number and percentage of parcel features intersecting the two highest hazard classifications.</p></li>
+        <li class="reveal"><span>04</span><h3>Interpret</h3><p>Examine how exposed areas relate spatially to critical services and emergency-planning concerns.</p></li>
+      </ol>
+      <aside class="method-boundary reveal"><strong>Analytical boundary</strong><p>An intersecting parcel is not automatically fully inside one hazard zone. The result is screening-level evidence, not parcel-specific risk determination.</p></aside>
+    </section>
+
+    <section class="stat-band" aria-label="2025 analytical results">
+      <div class="stat-lead reveal">
+        <span class="section-index">04 / KEY FINDINGS · 2025 ANALYSIS</span>
+        <h2>Nearly one in five analyzed parcel features intersected Zones 1 or 2.</h2>
+        <p>Exposure is spatial overlap—not a count of homes, residents, households, or expected losses.</p>
+      </div>
+      <div class="stat-grid stat-grid-five">
+        <article class="reveal"><strong>135,471</strong><span>total parcel features analyzed</span></article>
+        <article class="reveal hot"><strong>24,528</strong><span>intersecting Zones 1 or 2</span></article>
+        <article class="reveal"><strong>18.1%</strong><span>of analyzed parcel features</span></article>
+        <article class="reveal"><strong>4,183</strong><span>intersecting Zone 1</span></article>
+        <article class="reveal"><strong>3.1%</strong><span>of analyzed parcel features</span></article>
+      </div>
+    </section>
+
+    <section class="scrolly-shell" aria-label="Scroll-driven interpretation of the 2025 analysis">
+      <div class="scrolly-stage" aria-hidden="true">
+        <div class="scrolly-map-wrap">
+          <img class="scrolly-map active" data-map="overview" src="/hawaii-lava-v3-realmap-v5/assets/main-map.jpg" alt="" draggable="false" />
+          <img class="scrolly-map" data-map="zones" src="/hawaii-lava-v3-realmap-v5/assets/high-risk-map.jpg" alt="" draggable="false" />
+          <img class="scrolly-map" data-map="infrastructure" src="/hawaii-lava-v3-realmap-v5/assets/infrastructure-map.jpg" alt="" draggable="false" />
+          <div class="map-shade"></div>
+          <div class="map-state-label"><span>2025 MAP</span><strong id="map-state-title">Island overview</strong></div>
+        </div>
+      </div>
+
+      <div class="scrolly-steps">
+        <article class="story-step active" data-map="overview" data-title="Island overview">
+          <span class="step-no">04.1</span>
+          <p class="step-kicker">ORIENT</p>
+          <figure class="mobile-step-map"><a href="/hawaii-lava-v3-realmap-v5/assets/main-map.jpg" target="_blank" rel="noopener"><img src="/hawaii-lava-v3-realmap-v5/assets/main-map.jpg" alt="Hawaiʻi Island lava-risk overview map" loading="lazy" draggable="false" /></a><figcaption>2025 island overview · tap map for full resolution</figcaption></figure>
+          <h2>Start with the whole island.</h2>
+          <p>Establish the study area before narrowing to the highest long-term hazard classifications and the parcel geometry that intersects them.</p>
+        </article>
+        <article class="story-step" data-map="zones" data-title="Zones 1 & 2">
+          <span class="step-no">04.2</span>
+          <p class="step-kicker">FOCUS</p>
+          <figure class="mobile-step-map"><a href="/hawaii-lava-v3-realmap-v5/assets/high-risk-map.jpg" target="_blank" rel="noopener"><img src="/hawaii-lava-v3-realmap-v5/assets/high-risk-map.jpg" alt="Parcels located in lava-flow hazard Zones 1 and 2" loading="lazy" draggable="false" /></a><figcaption>2025 Zones 1 &amp; 2 map · tap for full resolution</figcaption></figure>
+          <h2>Focus on the highest long-term hazard classifications.</h2>
+          <p>Zones 1 and 2 provide the screening frame. They describe relative long-term hazard—not the location or timing of the next eruption.</p>
+        </article>
+        <article class="story-step" data-map="overview" data-title="Parcel exposure" data-zoom="true">
+          <span class="step-no">04.3</span>
+          <p class="step-kicker">MEASURE</p>
+          <figure class="mobile-step-map"><a href="/hawaii-lava-v3-realmap-v5/assets/main-map.jpg" target="_blank" rel="noopener"><img src="/hawaii-lava-v3-realmap-v5/assets/main-map.jpg" alt="Hawaiʻi parcel exposure overview map" loading="lazy" draggable="false" /></a><figcaption>2025 parcel exposure · tap for full resolution</figcaption></figure>
+          <h2>Translate the hazard layer into an exposure question.</h2>
+          <p>24,528 parcel features intersected Zones 1 or 2. Of all parcel features analyzed, 4,183 intersected Zone 1.</p>
+        </article>
+        <article class="story-step" data-map="infrastructure" data-title="Infrastructure context">
+          <span class="step-no">04.4</span>
+          <p class="step-kicker">CONNECT</p>
+          <figure class="mobile-step-map"><a href="/hawaii-lava-v3-realmap-v5/assets/infrastructure-map.jpg" target="_blank" rel="noopener"><img src="/hawaii-lava-v3-realmap-v5/assets/infrastructure-map.jpg" alt="Critical infrastructure and lava hazard zones on Hawaiʻi Island" loading="lazy" draggable="false" /></a><figcaption>2025 infrastructure context · tap for full resolution</figcaption></figure>
+          <h2>Exposure is not only about parcels.</h2>
+          <p>The original project also mapped hospitals, fire stations, emergency shelters, and roads relative to the hazard framework, raising questions about access, alternate response locations, evacuation routes, and infrastructure resilience.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="infrastructure-bridge-section">
+      <div class="bridge-copy reveal">
+        <p class="section-index">05 / INFRASTRUCTURE CONTEXT</p>
+        <h2>A hazard map becomes more useful when it begins to answer: what could become difficult to reach?</h2>
+        <p>The 2025 map provides a static snapshot. The next step is not to overwrite that historical analysis—it is to build a separate explorer using newer authoritative reference data.</p>
+      </div>
+      <figure class="bridge-map reveal">
+        <div class="bridge-map-meta" aria-label="Map vintage">
+          <span>2025 ORIGINAL GIS ANALYSIS</span>
+          <strong>Infrastructure context map</strong>
+        </div>
+        <div class="map-paper">
+          <img src="/hawaii-lava-v3-realmap-v5/assets/infrastructure-map.jpg" alt="Original 2025 critical infrastructure and lava hazard zones map" draggable="false" />
+        </div>
+        <figcaption class="bridge-map-caption">
+          <span>Fire stations · hospitals · mapped emergency shelters · major roads</span>
+          <span>Historical project output — not the Current Explorer dataset</span>
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="explorer-section" id="current-explorer">
+      <div class="explorer-heading reveal">
+        <div>
+          <p class="section-index current-index">06 / CURRENT INTERACTIVE EXPLORER</p>
+          <h2>From a 2025 GIS project to a real Web GIS explorer.</h2>
+        </div>
+        <p>The historical maps stay fixed as the 2025 study result. The live explorer below answers a different question: what long-term lava hazard surrounds a selected location, and which mapped hospital and fire station are nearest?</p>
+      </div>
+
+      <div class="explorer-purpose reveal" aria-label="What the interactive map does">
+        <div class="explorer-purpose-copy">
+          <span>WHAT THIS MAP ANSWERS</span>
+          <strong>Select a point. Read the hazard context. Compare nearby critical services.</strong>
+          <p>This is a planning-context tool—not an evacuation router. Distances are straight-line and facility status is not real time.</p>
+        </div>
+        <div class="explorer-purpose-steps">
+          <div><b>1</b><span><strong>Choose a location</strong><small>Use a preset, click the map, or use your device location.</small></span></div>
+          <div><b>2</b><span><strong>Read the hazard zone</strong><small>See the USGS long-term lava-flow hazard classification at that point.</small></span></div>
+          <div><b>3</b><span><strong>Check nearby services</strong><small>Compare straight-line distance to the nearest mapped hospital and fire station.</small></span></div>
+        </div>
+      </div>
+
+      <div class="explorer-mode-note real-map-note reveal">
+        <span>REAL MAP PREVIEW · LIVE REFERENCE LAYERS</span>
+        <p>The basemap is rendered with MapLibre. Hazard zones, hospitals, and fire stations are requested from State of Hawaiʻi GIS services. Facility and hazard calculations run in the browser after the reference layers load.</p>
+      </div>
+
+      <div class="explorer-shell reveal">
+        <div class="explorer-map-column">
+          <div class="explorer-toolbar" aria-label="Location explorer controls">
+            <label class="explorer-search-field" for="explorer-search">
+              <span>SEARCH A PRESET PLACE</span>
+              <input id="explorer-search" type="text" placeholder="Hilo, Pāhoa, Kailua-Kona, Volcano CDP..." autocomplete="off" />
+            </label>
+            <button class="explorer-button primary" id="explorer-search-button" type="button">Search</button>
+            <button class="explorer-button" id="explorer-location-button" type="button">Use my location</button>
+          </div>
+
+          <div class="sample-location-bar" aria-label="Explorer preset locations">
+            <span>TRUE COORDINATES</span>
+            <button type="button" data-demo-location="hilo">Hilo</button>
+            <button type="button" data-demo-location="pahoa">Pāhoa</button>
+            <button type="button" data-demo-location="kona">Kailua-Kona</button>
+            <button type="button" data-demo-location="volcano">Volcano CDP</button>
+            <button type="button" data-demo-location="oceanview">Hawaiian Ocean View</button>
+          </div>
+
+          <div class="explorer-layer-bar" aria-label="Map layers">
+            <span>LAYERS</span>
+            <label><input id="layer-hazard" type="checkbox" checked /> <i class="layer-swatch hazard"></i> Lava hazard zones <b class="layer-count" id="hazard-layer-count">loading</b></label>
+            <label><input id="layer-hospitals" type="checkbox" checked /> <i class="layer-swatch hospital"></i> Hospitals <b class="layer-count" id="hospital-layer-count">loading</b></label>
+            <label><input id="layer-fire" type="checkbox" checked /> <i class="layer-swatch fire"></i> Fire stations <b class="layer-count" id="fire-layer-count">loading</b></label>
+          </div>
+
+          <div id="current-explorer-map" class="current-explorer-map real-map" role="application" aria-label="Interactive Web GIS map of Hawaiʻi Island">
+            <div class="map-loading" id="map-loading">
+              <strong>Loading real map…</strong>
+              <span>MapLibre + OpenFreeMap</span>
+            </div>
+          </div>
+
+          <div class="explorer-map-footer">
+            <span>Click anywhere on the real map to analyze that geographic point.</span>
+            <span id="explorer-status" aria-live="polite">Initializing Web GIS…</span>
+          </div>
+        </div>
+
+        <aside class="explorer-results" aria-label="Selected location results">
+          <div class="results-head">
+            <span>CURRENT EXPLORER · WEB GIS PREVIEW</span>
+            <strong>Location profile</strong>
+          </div>
+          <div class="result-row result-row-icon selected-row">
+            <div class="result-icon result-icon-location" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false"><path d="M12 21s7-5.2 7-12a7 7 0 1 0-14 0c0 6.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.4"/></svg>
+            </div>
+            <div class="result-copy">
+              <span>SELECTED LOCATION</span>
+              <strong id="selected-location">Hilo</strong>
+              <small id="selected-coordinates">19.69284°, −155.08272° · U.S. Census CDP centroid</small>
+            </div>
+          </div>
+          <div class="result-row result-row-icon">
+            <div class="result-icon result-icon-hazard" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false"><path d="M12 3 2.8 20h18.4L12 3Z"/><path d="M12 8v5.8"/><circle cx="12" cy="17" r=".9"/></svg>
+            </div>
+            <div class="result-copy">
+              <span>LONG-TERM LAVA HAZARD</span>
+              <strong id="hazard-result">Loading official hazard polygons…</strong>
+              <small id="hazard-note">USGS 1991 lava-flow hazard zones · Hawaiʻi State GIS service metadata maintained May 2024.</small>
+            </div>
+          </div>
+          <div class="result-row result-row-icon demo-result-row">
+            <div class="result-icon result-icon-hospital" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M12 7v10M7 12h10"/></svg>
+            </div>
+            <div class="result-copy">
+              <span>NEAREST MAPPED HOSPITAL</span>
+              <strong id="hospital-result">Loading hospital points…</strong>
+              <small id="hospital-note">State of Hawaiʻi GIS hospital layer · September 2026. Distance will be straight-line.</small>
+            </div>
+          </div>
+          <div class="result-row result-row-icon demo-result-row">
+            <div class="result-icon result-icon-fire" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false"><path d="M13.4 2.8c.8 3-1.2 4.6-2.2 6.2-.9 1.5-.8 3.2.8 4.2 1.1-.7 1.7-1.8 1.8-3.2 2.1 1.5 3.4 3.7 3.4 6.1A5.2 5.2 0 0 1 12 21a5.2 5.2 0 0 1-5.2-4.9c0-2.3 1.1-4.3 3-6 .1 1.5.7 2.5 1.5 3.1-.2-2.8 1.3-4.8 2.1-6.2.6-1 .7-2.4 0-4.2Z"/></svg>
+            </div>
+            <div class="result-copy">
+              <span>NEAREST FIRE STATION</span>
+              <strong id="fire-result">Loading fire-station points…</strong>
+              <small id="fire-note">Statewide fire stations as of December 2025 · source published January 2026. Distance will be straight-line.</small>
+            </div>
+          </div>
+          <div class="result-row result-row-icon shelter-row">
+            <div class="result-icon result-icon-shelter" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false"><path d="M12 3 4 6v5c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V6l-8-3Z"/><path d="m9 12 2 2 4-5"/></svg>
+            </div>
+            <div class="result-copy">
+              <span>EMERGENCY SHELTERS</span>
+              <strong>Check active Civil Defense information</strong>
+              <small>Shelter activation changes by event and is not treated as a static nearest-facility result.</small>
+            </div>
+          </div>
+          <div class="distance-warning">
+            <strong>Distance does not equal accessibility.</strong>
+            <p>Straight-line distance does not account for road layout, closures, lava impacts, traffic, or emergency restrictions.</p>
+          </div>
+        </aside>
+      </div>
+
+      <div class="explorer-data-strip" aria-label="Explorer data sources">
+        <article><span>MAP ENGINE</span><strong>MapLibre GL JS + OpenFreeMap</strong><small>Real pan · zoom · geographic coordinates</small></article>
+        <article><span>HAZARD</span><strong>USGS lava-flow hazard zones</strong><small>Source: USGS 1991 · State GIS metadata maintained May 2024</small></article>
+        <article><span>HOSPITALS</span><strong>State of Hawaiʻi hospital GIS layer</strong><small>Dataset date: September 2026 · State DOH OHCA</small></article>
+        <article><span>FIRE STATIONS</span><strong>Statewide Fire Stations</strong><small>As of December 2025 · published January 2026</small></article>
+      </div>
+
+      <div class="privacy-panel reveal">
+        <div class="privacy-icon" aria-hidden="true">⌾</div>
+        <div>
+          <span>PRIVATE BY DESIGN</span>
+          <h3>Your location is not stored by SpatialGround.</h3>
+          <p>Your selected point or device location is used only in browser memory for the current map session. SpatialGround does not write those coordinates to cookies, localStorage, or a database. Hazard-zone lookup and nearest-facility calculations are performed client-side after the public reference layers load.</p>
+          <small>OpenFreeMap receives ordinary tile requests needed to draw the basemap, and Hawaiʻi State GIS receives requests for the public reference layers. This preview does not send your selected coordinate to those GIS services for the spatial calculations.</small>
+        </div>
+      </div>
+
+      <div class="current-data-warning reveal">
+        <span>CURRENT DATA ≠ CURRENT EMERGENCY CONDITIONS</span>
+        <p>This explorer is for spatial context. It will not represent active lava flows, evacuation orders, road closures, or real-time facility operating status.</p>
+      </div>
+    </section>
+
+    <section class="interpretation-grid limits-section">
+      <div class="interpretation-heading reveal">
+        <p class="section-index">07 / WHAT THE MAP DOES — AND DOES NOT — TELL YOU</p>
+        <h2>Knowing the limits is part of the analysis.</h2>
+      </div>
+      <article class="interpret-card measured reveal">
+        <span>MEASURED</span>
+        <h3>What the 2025 analysis supports</h3>
+        <p>Parcel features intersecting Zones 1 and 2, the Zone 1 subset, and the spatial relationship between mapped hazard areas and selected infrastructure.</p>
+      </article>
+      <article class="interpret-card not-measured reveal">
+        <span>NOT MEASURED</span>
+        <h3>What it does not establish</h3>
+        <p>Population exposure, building damage, eruption probability, future lava-flow paths, evacuation capacity, road failure, or real-time facility availability.</p>
+      </article>
+      <article class="interpret-card next reveal">
+        <span>INTERPRETATION</span>
+        <h3>Spatial proximity is context—not proof of accessibility or safety.</h3>
+        <p>A parcel intersecting a hazard zone does not mean every part has identical hazard. A nearby facility is not necessarily reachable during an emergency.</p>
+      </article>
+    </section>
+
+    <section class="decision-section">
+      <div class="decision-copy reveal">
+        <p class="section-index">08 / FROM EXPOSURE TO DECISIONS</p>
+        <h2>Where should more detailed planning begin?</h2>
+        <p>The spatial patterns identified here can help frame more detailed questions about land-use planning, emergency access, infrastructure resilience, community outreach, and where additional analysis may be most valuable.</p>
+      </div>
+      <div class="decision-lenses">
+        <article class="reveal"><span>01</span><h3>Exposure</h3><p>Where is exposure concentrated?</p></article>
+        <article class="reveal"><span>02</span><h3>Access</h3><p>Which critical services may become difficult to reach?</p></article>
+        <article class="reveal"><span>03</span><h3>Follow-up</h3><p>Where should more detailed planning begin?</p></article>
+      </div>
+      <p class="decision-boundary reveal">This analysis does not prescribe where development should or should not occur. It helps identify where decision-makers may need better information.</p>
+    </section>
+
+    <section class="official-section">
+      <div class="official-copy reveal">
+        <p class="section-index">09 / OFFICIAL LIVE INFORMATION</p>
+        <h2>A planning map is not an emergency alert.</h2>
+        <p>The maps and tools in this case study describe long-term hazard and spatial context. They do not provide current eruption conditions, evacuation orders, road closures, shelter activation, or emergency instructions.</p>
+      </div>
+      <div class="official-links">
+        <a class="official-card reveal" href="https://www.usgs.gov/hawaiian-volcano-observatory" target="_blank" rel="noopener noreferrer">
+          <span>USGS</span><h3>Hawaiian Volcano Observatory</h3><p>Current monitoring, eruption information, alert levels, and scientific updates.</p><strong>Open official source ↗</strong>
+        </a>
+        <a class="official-card reveal" href="https://hawaii-county-civil-defense-agency-hawaiicountygis.hub.arcgis.com/pages/alerts" target="_blank" rel="noopener noreferrer">
+          <span>COUNTY OF HAWAIʻI</span><h3>Civil Defense Alerts</h3><p>Emergency alerts, public instructions, road information, and event-specific shelter notices.</p><strong>Open official source ↗</strong>
+        </a>
+      </div>
+      <div class="emergency-banner reveal">During an emergency, follow official instructions—not this portfolio.</div>
+    </section>
+
+    <section class="next-analysis-section">
+      <div class="next-analysis-copy reveal">
+        <p class="section-index">10 / NEXT ANALYSIS</p>
+        <h2>Move beyond intersection and straight-line proximity.</h2>
+        <p>A stronger operational study could incorporate road-network accessibility, travel distance, population and building exposure, updated infrastructure datasets, evacuation capacity, road-disruption scenarios, and scenario-based lava-flow modeling.</p>
+        <p>The interactive explorer is one step in that direction—turning a static GIS analysis into a user-driven spatial question.</p>
+      </div>
+    </section>
+
+    <section class="project-notes-section">
+      <div class="project-notes-heading reveal">
+        <p class="section-index">11 / PROJECT & DATA NOTES</p>
+        <h2>Keep the historical analysis and current explorer clearly separated.</h2>
+      </div>
+      <div class="project-notes-grid">
+        <article class="reveal"><span>ORIGINAL GIS ANALYSIS</span><strong>Chi Ho · GIS and Natural Hazards · University of Denver · 2025</strong><p>Original parcel statistics and static maps remain fixed as the historical academic result.</p></article>
+        <article class="reveal"><span>ORIGINAL ANALYSIS SOURCES</span><strong>USGS · Hawaiʻi Statewide GIS Program · USGS elevation · Esri / ArcGIS Online</strong><p>These source families reflect the datasets used in the original project.</p></article>
+        <article class="reveal"><span>CURRENT EXPLORER</span><strong>Source · dataset date · last checked</strong><p>Each reference layer carries its own provenance and date. Newer data is used where authoritative GIS is available, without relabeling older layers as “current.”</p></article>
+      </div>
+    </section>
+
+    <section class="case-close">
+      <p class="eyebrow">HAWAIʻI LAVA RISK</p>
+      <h2>Preserve the analysis. Update the context. Make the next spatial question easier to ask.</h2>
+      <p>This version separates the verified 2025 study from a current-data Web GIS extension and from official live emergency information.</p>
+    </section>
+  </main>
+
+  <a class="back-float" href="/#selected-work" aria-label="Back to Selected Work"><span>←</span><strong>Back to Selected Work</strong></a>
+</body>
+</html>
