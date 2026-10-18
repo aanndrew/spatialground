@@ -17,6 +17,11 @@ const title = "About — SpatialGround";
       <p class="eyebrow">BEHIND SPATIALGROUND</p>
       <h1>Mapping landscapes.<br/><em>Informing decisions.</em></h1>
       <p class="lead">SpatialGround is a portfolio exploring environmental challenges through GIS, spatial analysis, natural resource management, and environmental policy.</p>
+      <!-- sg-about-hero-v4: portrait beside the opening statement -->
+      <figure class="sg-about-hero-v4">
+        <img src="/images/about-profile.png" alt="Researcher visiting a Yellowstone geothermal landscape" width="1536" height="1024" loading="eager" decoding="async" />
+        <figcaption>FIELD EXPERIENCE <span>Â·</span> YELLOWSTONE NATIONAL PARK</figcaption>
+      </figure>
       <div class="line"></div>
       <h2>About the researcher</h2>
       <p>As an environmental studies scholar, I am pursuing my master’s degree from the University of Denver in the subject of Environmental Policy and Management, with specialization in Natural Resource Management. My academic and professional expertise lies in Geographic Information Systems (GIS).</p>
@@ -44,4 +49,22 @@ const title = "About — SpatialGround";
   h2{font-family:Georgia,serif;font-size:1.8rem;font-weight:400}
   p{line-height:1.85;color:#d4d0c7}
   .return{display:inline-block;margin-top:32px;font-size:.7rem;letter-spacing:.17em}
+  /* sg-about-hero-v4: photo at upper right, research copy below */
+  .intro{position:relative;max-width:none;min-height:0}
+  .intro > .eyebrow,.intro > h1,.intro > .lead{max-width:52%}
+  .sg-about-hero-v4{position:absolute;top:0;right:0;width:43%;margin:0}
+  .sg-about-hero-v4 img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:contain;border:1px solid rgba(228,200,148,.42);border-radius:5px;box-shadow:0 22px 55px rgba(0,0,0,.35)}
+  .sg-about-hero-v4 figcaption{margin-top:13px;color:#e4c894;font-size:.64rem;letter-spacing:.16em;line-height:1.6}
+  .sg-about-hero-v4 figcaption span{padding:0 .35em}
+  .intro > .line{margin-top:clamp(85px,10vw,155px)}
+  .intro > h2,.intro > p:not(.eyebrow):not(.lead){max-width:740px}
+  /* Previous V3 photo layout is retired; its researcher text stays intact. */
+  .sg-about-photo-v3{display:block!important;margin-top:0!important}
+  .sg-about-photo-v3 .sg-profile-figure{display:none!important}
+  .sg-about-photo-v3 .sg-profile-copy{max-width:740px}
+  @media(max-width:800px){
+    .intro > .eyebrow,.intro > h1,.intro > .lead{max-width:none}
+    .sg-about-hero-v4{position:static;width:100%;max-width:700px;margin:28px 0 0}
+    .intro > .line{margin-top:38px}
+  }
 </style>
