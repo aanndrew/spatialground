@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Environmental Watch — OpenFreeMap basemap test</title>
+<link rel="stylesheet" href="/hawaii-lava-risk/vendor/maplibre/maplibre-gl.css">
+<style>body{margin:0;background:#031923;color:#dff9f6;font:15px system-ui,sans-serif}.top{padding:15px 20px;background:#062a35;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}p{margin:0}a{color:#50ead9}.status{font-weight:700}#test-map{height:calc(100vh - 140px);min-height:400px}code{font-family:ui-monospace,monospace;font-size:12px}</style></head>
+<body><div class="top"><div><strong>OpenFreeMap standalone test</strong><p>Uses exactly the same style URL as Hawaiʻi Lava Risk. No Environmental Watch dashboard code is loaded.</p></div><div><div id="state" class="status">Loading basemap…</div><a href="/environmental-watch/">← Back to dashboard</a></div></div>
+<div id="test-map"></div><div class="top"><code>Style: https://tiles.openfreemap.org/styles/liberty</code><span id="details">Waiting for MapLibre…</span></div>
+<script type="module">
+const status=document.getElementById('state');const details=document.getElementById('details');let errors=0;
+try{
+ const maplibregl=await import('/hawaii-lava-risk/vendor/maplibre/maplibre-gl.mjs');
+ if(typeof maplibregl.setWorkerUrl==='function')maplibregl.setWorkerUrl('/hawaii-lava-risk/vendor/maplibre/maplibre-gl-worker.mjs');
+ const map=new maplibregl.Map({container:'test-map',style:'https://tiles.openfreemap.org/styles/liberty',center:[-107,41],zoom:2.5,minZoom:1.7,maxZoom:12});
+ map.addControl(new maplibregl.NavigationControl(),'top-right');
+ map.on('load',()=>{status.textContent='✓ MapLibre style loaded';details.textContent='Pan and zoom to verify tiles; check labels/land for a few seconds.';});
+ map.on('error',e=>{errors++;console.warn('[basemap probe]',e.error||e);details.textContent='Map errors: '+errors+' — F12 console for details.';});
+ setTimeout(()=>{if(!map.isStyleLoaded()){status.textContent='⚠ Map style did not fully load';details.textContent='Check F12 → Network for OpenFreeMap requests.';}},15000);
+}catch(error){status.textContent='MapLibre import failed';details.textContent=String(error);console.error(error);}
+</script></body></html>

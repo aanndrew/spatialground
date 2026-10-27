@@ -1,0 +1,141 @@
+---
+// Isolated test route; does not modify the existing 9-card portfolio.
+const pageTitle = 'North America Environmental Watch | SpatialGround';
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#05141a" />
+  <meta name="description" content="Explore NASA EONET natural events and USGS earthquakes on an interactive North America GIS map." />
+  <title>{pageTitle}</title>
+  <link rel="stylesheet" href="/environmental-watch/watch.css" />
+  <link rel="stylesheet" href="/environmental-watch/hero-v13.css" />
+  <script is:inline src="/environmental-watch/hero-v13-time.js" defer></script>
+  <link rel="stylesheet" href="/environmental-watch/map-theme-v13e.css" />
+  <link rel="stylesheet" href="/environmental-watch/v15-layout.css" />
+  <link rel="stylesheet" href="/environmental-watch/v16-events.css" />
+<link rel="stylesheet" href="/environmental-watch/v161-geography.css" />
+  
+  
+  <link rel="stylesheet" href="/environmental-watch/v165-integrated.css" />
+  <link rel="stylesheet" href="/environmental-watch/v167-refined.css" />
+  <link rel="stylesheet" href="/environmental-watch/v168-map.css" />
+</head>
+<body class="ew-body">
+<div class="ew-app" data-page="dashboard">
+  <a class="ew-float-back" href="https://spatialground.earth/#selected-work" aria-label="Back to Selected Work"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg><span>Back to Selected Work</span></a>
+  
+  <header class="ew-hero ew-hero-v12">
+    <div class="ew-hero-art" aria-hidden="true">
+      <svg class="ew-satellite-scene" viewBox="0 0 800 360" role="presentation" focusable="false" aria-hidden="true">
+        <defs>
+          <linearGradient id="ew-beam-gradient" x1="0" y1="0" x2="0.15" y2="1">
+            <stop offset="0%" stop-color="#b1fff5" stop-opacity="0.68" />
+            <stop offset="48%" stop-color="#46e4dc" stop-opacity="0.25" />
+            <stop offset="100%" stop-color="#42f6e7" stop-opacity="0.06" />
+          </linearGradient>
+          <radialGradient id="ew-target-glow">
+            <stop offset="0%" stop-color="#4affe5" stop-opacity="0.29" />
+            <stop offset="100%" stop-color="#4affe5" stop-opacity="0" />
+          </radialGradient>
+          <filter id="ew-beam-glow"><feGaussianBlur stdDeviation="7" /></filter>
+        </defs>
+        <path class="ew-orbit-halo" d="M 8 234 Q 368 -96 792 126" fill="none" stroke="#43dcca" stroke-opacity=".26" stroke-width="5" />
+        <path class="ew-fixed-orbit" d="M 8 234 Q 368 -96 792 126" fill="none" stroke="#63fbe8" stroke-opacity=".82" stroke-width="1.8" stroke-dasharray="6 10" />
+        <path class="ew-orbit-secondary" d="M 58 306 Q 340 44 798 224" fill="none" stroke="#46d3dc" stroke-opacity=".48" stroke-width="1.2" stroke-dasharray="2 12" />
+        <circle class="ew-orbit-moving-dot" r="4" fill="#a0fff4">
+          <animateMotion dur="26s" repeatCount="indefinite" path="M 8 234 Q 368 -96 792 126" />
+        </circle>
+        <circle class="ew-orbit-moving-dot ew-orbit-moving-dot-small" r="2.5" fill="#7acaff">
+          <animateMotion dur="35s" repeatCount="indefinite" path="M 58 306 Q 340 44 798 224" />
+        </circle>
+        <g class="ew-unified-observer">
+          <!-- One coordinate system: sensor (468,112), footprint (430,300). Beam origin corrected per user markup. -->
+          <path d="M468 112 L382 298 Q430 323 478 298 Z" fill="#3affec" opacity=".13" filter="url(#ew-beam-glow)" />
+          <path class="ew-cone" d="M468 112 L382 298 Q430 323 478 298 Z" fill="url(#ew-beam-gradient)" />
+          <ellipse cx="430" cy="300" rx="91" ry="27" fill="url(#ew-target-glow)" />
+          <g class="ew-footprint">
+            <ellipse class="ew-ring ew-ring-first" cx="430" cy="300" rx="94" ry="28" />
+            <ellipse class="ew-ring ew-ring-second" cx="430" cy="300" rx="69" ry="21" />
+            <ellipse class="ew-ring ew-ring-third" cx="430" cy="300" rx="45" ry="14" />
+          </g>
+          <image href="/environmental-watch/satellite-v13b.svg" x="335" y="25" width="308" height="137" preserveAspectRatio="xMidYMid meet" />
+        </g>
+      </svg>
+      <span class="ew-hero-art-caption">EARTH OBSERVATION · VISUAL CONCEPT</span>
+    </div>
+    <div class="ew-hero-inner">
+      <div class="ew-hero-copy-wrap">
+        <p class="ew-overline">ENVIRONMENTAL INTELLIGENCE / NORTH AMERICA</p>
+        <h1>North America<br /><em>Environmental Watch</em></h1>
+        <p class="ew-hero-copy">Monitoring environmental hazards, ecosystems and natural events through public geospatial data.</p>
+      </div>
+      <div class="ew-hero-meta" aria-label="Data retrieval times">
+        <div class="ew-live-data"><span class="ew-live-dot">●</span> <span id="ew-mode-label">Official feeds</span></div>
+        <div class="ew-hero-meta-line is-label" id="ew-updated">Loading sources…</div>
+        <div class="ew-dual-time"><div><b>UTC</b> <time id="ew-updated-utc">—</time></div><div><b>Local</b> <time id="ew-updated-local">—</time></div></div>
+        <div class="ew-hero-meta-line is-note">Rechecks feeds every 30 min while open</div>
+      </div>
+    </div>
+  </header>
+  <main class="ew-container">
+    <div id="ew-demo-banner" class="ew-demo-banner" hidden>DEMO MODE — All listed incidents and locations are illustrative examples, not live events.</div>
+    <section class="ew-metrics" aria-label="Feed statistics">
+      <div class="ew-stat"><div class="ew-stat-icon ew-orange">♨</div><div><strong id="ew-kpi-events">—</strong><span>Events in selected period</span></div></div>
+      <div class="ew-stat"><div class="ew-stat-icon ew-blue">◎</div><div><strong id="ew-kpi-types">—</strong><span>Event categories represented</span></div></div>
+      <div class="ew-stat"><div class="ew-stat-icon ew-purple">▤</div><div><strong id="ew-kpi-sources">—</strong><span>Responding data feeds</span></div></div>
+      <div class="ew-stat"><div class="ew-stat-icon ew-teal">◷</div><div><strong id="ew-kpi-update">—</strong><span>Refresh interval / mode</span></div></div>
+    </section>
+    <section class="ew-panel ew-feature" id="ew-feature">
+      <div class="ew-panel-bar"><h2>01 / Featured Environmental Issue</h2><a href="https://www.drought.gov/" target="_blank" rel="noopener noreferrer">Official drought data ↗</a></div>
+      <div class="ew-feature-layout">
+        <div class="ew-feature-copy"><span class="ew-eyebrow">LONG-TERM ENVIRONMENTAL PRESSURE</span><h3>Drought &amp; Water Stress</h3><h4>Across North America</h4>
+          <p>Drought affects freshwater resources, vegetation, habitats and communities. Explore monitored conditions through official drought services.</p>
+          <div class="ew-note">This V1 feature is editorial context, <b>not a live drought severity map</b>. Quantitative GIS drought layers are planned for a later release.</div>
+          <a class="ew-primary-link" href="https://www.drought.gov/" target="_blank" rel="noopener noreferrer">Explore Drought.gov ↗</a>
+        </div>
+        <div class="ew-feature-art" role="img" aria-label="Stylized landscape graphic with contour-like lines; not actual drought measurements">
+          <div class="ew-feature-orbit"></div><div class="ew-feature-abstract-map"></div><div class="ew-feature-art-label">WATER · LAND · ECOSYSTEMS<br/><small>Illustrative visualization, not measured GIS data</small></div>
+        </div>
+      </div>
+    </section>
+    <section class="ew-panel ew-map-section" id="ew-live-map">
+      <div class="ew-panel-bar ew-map-title"><div><h2>02 / Interactive Event Map</h2><p>NASA EONET, USGS M5+ earthquakes and NOAA oil/chemical reports · up to 90 days</p></div>
+        <div class="ew-control-group"><button type="button" class="ew-small-btn is-selected" data-mode="live">Live</button><button type="button" class="ew-small-btn" data-mode="demo">Demo</button><button type="button" class="ew-small-btn" id="ew-refresh" title="Fetch public feeds again">↻ Refresh</button></div>
+      </div>
+      <div class="ew-map-toolbar"><div id="ew-filters" class="ew-filters" aria-label="Filter events by category"></div><div class="ew-control-group"><button type="button" class="ew-small-btn" data-days="7">7 days</button><button type="button" class="ew-small-btn is-selected" data-days="30">30 days</button></div></div>
+      <div class="ew-map-shell"><div id="ew-map" class="ew-map" aria-label="Interactive North America event map"></div>
+        <div class="ew-map-legend"><span class="ew-live-dot">●</span> <span id="ew-map-count">Loading…</span> <small>Locations are event coordinates, not incident footprints</small></div>
+        <div class="ew-map-selection" id="ew-map-selection" hidden></div>
+        <div class="ew-map-help" id="ew-map-help" hidden>Interactive map unavailable in this browser. A local reference atlas remains as a background; try enabling WebGL or hardware acceleration.</div>
+      </div>
+      <div id="ew-status" class="ew-feed-status" role="status" aria-live="polite">Loading data…</div>
+    </section>
+    <section class="ew-panel" id="ew-significant">
+      <div class="ew-panel-bar"><div><h2>03 / Significant &amp; Recent Events</h2><p>Latest matching feed records, not a formal severity ranking</p></div><span class="ew-caption">Select any card for event details →</span></div>
+      <div class="ew-event-grid" id="ew-event-cards"><p class="ew-empty">Fetching records…</p></div>
+    </section>
+    <section class="ew-panel" id="ew-insights">
+      <div class="ew-panel-bar"><h2>04 / Environmental Insights</h2><span class="ew-caption">Research directions</span></div>
+      <div class="ew-insight-grid">
+        <article class="ew-insight"><span class="ew-insight-icon">❧</span><h3>Ecosystem impacts</h3><p>Vegetation change, habitat disruption and recovery after major disturbances.</p></article>
+        <article class="ew-insight"><span class="ew-insight-icon">▥</span><h3>Regional patterns</h3><p>Compare temporal and spatial patterns using consistent datasets.</p></article>
+        <article class="ew-insight"><span class="ew-insight-icon">◉</span><h3>Why it matters</h3><p>Connect public hazard observations with conservation and natural-resource questions.</p></article>
+        <article class="ew-insight"><span class="ew-insight-icon">⌖</span><h3>GIS analysis</h3><p>Next phase: land cover, protected areas and satellite-based change detection.</p></article>
+      </div>
+    </section>
+    <section class="ew-panel ew-sources" id="ew-sources">
+      <div class="ew-panel-bar"><h2>05 / Data Sources &amp; Methodology</h2><span class="ew-caption">Transparent data provenance</span></div>
+      <div class="ew-source-grid"><a href="https://eonet.gsfc.nasa.gov/" target="_blank" rel="noopener noreferrer"><strong>NASA EONET</strong><span>Curated, open natural events</span></a><a href="https://earthquake.usgs.gov/earthquakes/feed/" target="_blank" rel="noopener noreferrer"><strong>USGS</strong><span>M5.0+ earthquakes, up to 90 days</span></a><a href="https://www.drought.gov/" target="_blank" rel="noopener noreferrer"><strong>Drought.gov</strong><span>Background drought context</span></a><a href="https://www.noaa.gov/" target="_blank" rel="noopener noreferrer"><strong>NOAA IncidentNews</strong><span>Oil / chemical notifications; synchronized snapshot</span></a></div>
+      <p class="ew-footnote">V1 scope: NASA EONET open records and USGS earthquake observations and selected NOAA notifications. Geography uses a broad North America bounding box, including offshore observations. “Open” is NASA's catalog status; an earthquake is an observation, not an active emergency. Not all ecological hazards are represented. Updates are fetched by the visitor's browser, with no Cloudflare Worker or server-side cache in V1.</p>
+    </section>
+  </main>
+  <footer class="ew-footer">© SpatialGround · Environmental Watch V1 Test Build <span>Independent prototype — no changes to your existing portfolio cards</span></footer>
+</div>
+<script>import '../../scripts/environmental-watch/dashboard.ts';</script>
+  <script is:inline src="/environmental-watch/v15-layout.js"></script><script is:inline src="/environmental-watch/v165-integrated.js"></script><script is:inline src="/environmental-watch/v167-refined.js"></script>
+  <script is:inline src="/environmental-watch/v171-geography.js"></script>
+</body>
+</html>

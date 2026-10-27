@@ -1,0 +1,34 @@
+/* Environmental Watch V1.3e: consistent map palette + a persistent detail return. */
+.ew-map-appearance.maplibregl-ctrl-group {
+  overflow:visible; background:rgba(7,31,43,.94);border:1px solid rgba(81,210,207,.44);
+  border-radius:7px; box-shadow:0 3px 16px rgba(0,0,0,.35);
+}
+.ew-map-appearance .ew-map-appearance-button {
+  font:600 12px/1.25 Inter,system-ui,sans-serif;
+  color:#c9fbf5; background:transparent; border:0; min-height:35px;
+  min-width:72px; padding:8px 12px;cursor:pointer;
+}
+.ew-map-appearance .ew-map-appearance-button:hover,
+.ew-map-appearance .ew-map-appearance-button:focus-visible {
+  color:#05161d; background:#56ded2; outline:2px solid #63e9dc;
+}
+.ew-detail-return-float {
+  position:fixed; z-index:1000;left:clamp(12px,2vw,30px);
+  bottom:clamp(14px,2vw,26px); display:inline-flex;align-items:center;gap:9px;
+  max-width:calc(100vw - 24px); padding:11px 15px;
+  text-decoration:none; color:#e5fbf7; background:rgba(4,26,36,.91);
+  border:1px solid rgba(76,211,211,.68); border-radius:11px;
+  font:600 13px/1.2 Inter,system-ui,sans-serif;
+  box-shadow:0 6px 25px rgba(0,0,0,.39);backdrop-filter:blur(9px);
+}
+.ew-detail-return-float:hover,.ew-detail-return-float:focus-visible {
+  background:#11414a; border-color:#69f5e4; color:white;
+}
+.ew-detail-return-float span {font-size:19px;line-height:1;}
+@media(max-width:480px){.ew-detail-return-float{font-size:12px;padding:10px 12px;}}
+@media(prefers-reduced-motion:reduce){.ew-detail-return-float{transition:none;}}
+
+/* Stable map appearance: tint ONLY the MapLibre WebGL canvas, not its HTML markers/controls. */
+.maplibregl-canvas.ew-map-muted {
+  filter: brightness(.77) saturate(.68) contrast(1.05);
+}

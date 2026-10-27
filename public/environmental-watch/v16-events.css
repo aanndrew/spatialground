@@ -1,0 +1,8 @@
+/* Environmental Watch V1.6 — supplementary controls only, preserve V1.5 layout */
+.ew-v16-groupbar{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin:8px 0 10px}
+.ew-v16-groupbar button{border:1px solid #28515b;background:#082a36;color:#c5e3e3;border-radius:6px;padding:8px 12px;font-family:inherit;font-size:12px;font-weight:600;line-height:1.2;cursor:pointer;transition:background .15s,border-color .15s}
+.ew-v16-groupbar button:hover{border-color:#56dccc;color:#fff}
+.ew-v16-groupbar button.is-selected{background:#50dbcd;color:#03232a;border-color:#50dbcd}
+.ew-v16-feed-note{font-size:11px;line-height:1.5;color:#a8c6cc;margin:8px 1px 10px;max-width:100%;text-wrap:pretty}
+.ew-map-toolbar .ew-control-group{display:flex;flex-wrap:wrap;gap:5px}
+@media(max-width:660px){.ew-v16-groupbar button{font-size:11px;padding:7px 10px}.ew-v16-feed-note{font-size:10px}}

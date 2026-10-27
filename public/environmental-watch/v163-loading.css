@@ -1,0 +1,9 @@
+/* V1.6.3: unobtrusive real-time source progress, responsive 80/20 dashboard */
+.ew-v163-source-status{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 11px;font-size:11px;line-height:1.35}
+.ew-v163-source{display:inline-block;padding:6px 9px;border-radius:6px;border:1px solid #29505a;background:#072632;color:#a5c6cb;white-space:normal}
+.ew-v163-source.ew-v163-ready{border-color:#2b907b;color:#70e6c8;background:#08372f}
+.ew-v163-source.ew-v163-failed{border-color:#956c3e;color:#ffd29c;background:#382b20}
+.ew-v163-source.ew-v163-waiting{border-color:#2d6d7c;color:#bce2ea;background:#12333c}
+.ew-v163-placeholder{margin:0;padding:24px 18px;color:#a9d5d8;background:linear-gradient(110deg,#082b35,#11404a,#082b35);border:1px solid #21515a;border-radius:8px;line-height:1.55;animation:ewV163Pulse 1.7s ease-in-out infinite}
+@keyframes ewV163Pulse{50%{opacity:.64}}
+@media(prefers-reduced-motion:reduce){.ew-v163-placeholder{animation:none}}

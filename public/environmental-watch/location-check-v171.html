@@ -1,0 +1,72 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verify Event Coordinates | SpatialGround</title>
+<link rel="stylesheet" href="/environmental-watch/vendor/maplibre/maplibre-gl.css">
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#041920;color:#e8faf8;font:14px/1.5 Inter,system-ui,sans-serif}header{padding:14px 20px;background:#062b36;border-bottom:1px solid #29676f}h1{margin:0;font-size:21px}.muted{color:#a4c5c9;font-size:12px}.shell{display:grid;grid-template-columns:minmax(0,2fr) minmax(280px,1fr);min-height:calc(100vh - 85px)}#map{height:calc(100vh - 85px);min-height:400px;background:#e6ece7}.panel{padding:18px 20px;background:#082732;border-left:1px solid #24505a}strong{color:#f2ffff}p{margin:0 0 14px}.pill{display:inline-block;background:#123c43;border:1px solid #307983;color:#d9f8f3;padding:7px 10px;border-radius:7px;font-weight:700;margin:2px}.btn{display:inline-block;border:1px solid #40a39f;border-radius:6px;padding:8px 10px;color:#06292b;background:#58ddcd;cursor:pointer;text-decoration:none;font-weight:800;margin:3px}#qa{padding:12px;border:1px solid #285861;border-radius:6px;background:#103943;white-space:pre-wrap;overflow-wrap:anywhere}#error{color:#ffbf95}small{color:#a4c5c9}.point{width:28px;height:28px;background:#07232d;border:4px solid #ffb44f;border-radius:50%;box-shadow:0 0 0 8px #ffc45277,0 0 22px #ffb44f}.hint{border-left:2px solid #ffc35d;padding-left:10px}.link{color:#61e5da;overflow-wrap:anywhere}@media(max-width:800px){.shell{display:block}#map{height:52vh;min-height:330px}.panel{border-left:0;border-top:1px solid #24505a}}
+</style></head><body>
+<header><h1>SpatialGround · Source Coordinate Check</h1><div class="muted">Independent event point viewer — not an incident perimeter or damage map</div></header>
+<div class="shell"><div id="map"></div><aside class="panel"><h2 id="name">Checking event location</h2><p id="coords">—</p><p id="source" class="muted"></p><div><button class="btn" data-zoom="8">Zoom 8</button><button class="btn" data-zoom="12">Zoom 12</button><button class="btn" data-zoom="16">Zoom 16</button></div><h3>Official source cross-check</h3><div id="qa" role="status">Loading…</div><p class="hint" style="margin-top:15px">Coordinates may represent the event observation point, epicenter, or an approximate reporting location. Matching an official point does not establish an affected area or precise incident boundary.</p><p><a class="link" id="official" target="_blank" rel="noopener noreferrer" hidden>Open original agency record ↗</a></p><p><a class="link" href="/environmental-watch/">Back to Environmental Watch</a></p><small>Uses the independent Environmental Watch MapLibre engine and OpenFreeMap basemap; does not use OpenStreetMap's web viewer.</small></aside></div>
+<script>
+(() => {
+ const q=new URLSearchParams(location.search),lat=Number(q.get('lat')),lon=Number(q.get('lon'));
+ const source=q.get('source')||'',id=q.get('id')||'',name=(q.get('name')||'Event coordinates').slice(0,200);
+ const text=(id,value)=>document.getElementById(id).textContent=value;
+ const finite=q.has('lat')&&q.has('lon')&&Number.isFinite(lat)&&Number.isFinite(lon)&&Math.abs(lat)<=90&&Math.abs(lon)<=180;
+ text('name',name);text('source','Source: '+(source||'not specified')+' · Record: '+(id||'not supplied'));
+ if(!finite){text('qa','Invalid or missing latitude/longitude. No point will be displayed.');return;}
+ text('coords',`${lat.toFixed(6)}° latitude, ${lon.toFixed(6)}° longitude · WGS84`);
+ const point=[lon,lat];let map=null;
+ function report(t){text('qa',t);}
+ const showOfficial=(href)=>{if(!href)return;const a=document.getElementById('official');a.href=href;a.hidden=false;};
+ function walkGeometry(g){
+   if(!g||!Array.isArray(g.coordinates))return null;
+   const xs=[],ys=[];
+   function walk(v){if(!Array.isArray(v))return;if(typeof v[0]==='number'&&typeof v[1]==='number'){xs.push(v[0]);ys.push(v[1]);return;}v.forEach(walk);}walk(g.coordinates);
+   if(!xs.length)return null;return [(Math.min(...xs)+Math.max(...xs))/2,(Math.min(...ys)+Math.max(...ys))/2];
+ }
+ async function verify(){
+   if(!id||!['eonet','usgs','noaa'].includes(source)){report('Map shows the supplied coordinate. No official event record is available for automatic comparison.');return;}
+   try{
+     let raw,actual=null,kind='',href='';
+     if(source==='eonet'){
+       if(!/^[\w-]{1,100}$/.test(id))throw Error('Invalid EONET record ID');
+       href=`https://eonet.gsfc.nasa.gov/api/v3/events/${encodeURIComponent(id)}`;
+       const r=await fetch(href);if(!r.ok)throw Error('NASA API HTTP '+r.status);raw=await r.json();
+       const list=Array.isArray(raw.geometry)?raw.geometry:[];
+       const latest=[...list].sort((a,b)=>Date.parse(b.date||'')-Date.parse(a.date||''))[0];
+       actual=walkGeometry(latest);kind=latest?.type==='Polygon'?'Polygon bounding-box midpoint (approximate, not a footprint point)':'NASA EONET observation point';
+     } else if(source==='usgs'){
+       if(!/^[\w-]{1,100}$/.test(id))throw Error('Invalid USGS record ID');
+       href=`https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&eventid=${encodeURIComponent(id)}`;
+       const r=await fetch(href);if(!r.ok)throw Error('USGS API HTTP '+r.status);raw=await r.json();
+       const g=raw.geometry||raw.features?.[0]?.geometry;actual=g?.coordinates?.slice(0,2);kind='USGS earthquake epicenter / source point';
+     } else {
+       if(!/^\d{1,12}$/.test(id))throw Error('Invalid NOAA incident ID');
+       href=`https://incidentnews.noaa.gov/incident/${encodeURIComponent(id)}`;
+       const r=await fetch('/environmental-watch/noaa-incidents.json',{cache:'no-store'});if(!r.ok)throw Error('NOAA snapshot HTTP '+r.status);raw=await r.json();
+       const rec=raw.records?.find(x=>String(x.id)===id);
+       if(rec)actual=[Number(rec.lon),Number(rec.lat)];
+       if(id==='11230'){actual=[-123.7133333333,37.5105];kind='Previously checked NOAA case 11230 agency coordinate; snapshot may differ';}
+       else kind='NOAA local snapshot coordinate (may be approximate; not independently re-fetched from IncidentNews)';
+     }
+     showOfficial(href);
+     if(!Array.isArray(actual)||actual.length<2||!actual.every(Number.isFinite))throw Error('Source has no valid point');
+     const dx=Math.abs(actual[0]-lon),dy=Math.abs(actual[1]-lat);
+     const matched=dx<0.0002&&dy<0.0002;
+     report(`${matched?'✓ Point matches the source values':'⚠ Point differs from source values'}\n${kind}\nSource: ${actual[1].toFixed(6)}, ${actual[0].toFixed(6)}\nDisplayed: ${lat.toFixed(6)}, ${lon.toFixed(6)}\n${matched?'Coordinate agreement is confirmed; incident footprint is NOT confirmed.':'Source may have changed, or the dashboard snapshot uses another observation date. Review original record.'}`);
+   }catch(e){report('Could not automatically compare this event with the source.\n'+(e?.message||e)+'\nThe map still shows the coordinates supplied by Environmental Watch.');}
+ }
+ window.addEventListener('ew-maplibre-ready',()=>{
+   try{const ml=window.__EW_MAPLIBRE_API__;
+     map=new ml.Map({container:'map',style:'https://tiles.openfreemap.org/styles/liberty',center:point,zoom:10,minZoom:1.7,maxZoom:19,attributionControl:true});
+     map.addControl(new ml.NavigationControl(),'top-right');
+     const marker=document.createElement('div');marker.className='point';marker.title='Reported event point';
+     new ml.Marker({element:marker,anchor:'center'}).setLngLat(point).addTo(map);
+     document.querySelectorAll('[data-zoom]').forEach(b=>b.addEventListener('click',()=>map.easeTo({center:point,zoom:Number(b.dataset.zoom),duration:250})));
+   }catch(e){report('Unable to initialize map: '+(e?.message||e));}
+ },{once:true});
+ window.addEventListener('ew-maplibre-error',()=>report('Local MapLibre engine failed: '+(window.__EW_MAPLIBRE_ERROR__||'unknown error')),{once:true});
+ const s=document.createElement('script');s.type='module';s.src='/environmental-watch/ew-maplibre-bridge.mjs';s.onerror=()=>report('Local map bridge could not load');document.head.appendChild(s);
+ verify();
+})();
+</script></body></html>

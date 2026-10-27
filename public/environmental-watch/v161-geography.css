@@ -1,0 +1,23 @@
+/* V1.6.1: readable map controls & coordinate QA links. */
+.ew-app .ew-map-appearance.ew-v161-basemap.maplibregl-ctrl-group {
+  display:flex;overflow:hidden;max-width:calc(100vw - 34px);
+  border:1px solid #319d9b;border-radius:7px;
+  background:#071e29ef;
+}
+.ew-app .ew-v161-basemap .ew-map-appearance-button {
+  width:auto;min-width:62px;min-height:36px;padding:7px 10px;
+  border:0;border-right:1px solid #23515c;
+  background:transparent;color:#d8f4f2;
+  font:600 11px/1.2 Inter,system-ui,sans-serif;
+}
+.ew-app .ew-v161-basemap .ew-map-appearance-button:last-child{border-right:0;}
+.ew-app .ew-v161-basemap .ew-map-appearance-button.is-selected {
+  background:#48dccc;color:#07282b;font-weight:800;
+}
+.ew-app .ew-v161-coordinates {
+  color:#c5e4e6;margin:9px 0 2px;font-size:11px;line-height:1.6;
+  overflow-wrap:anywhere;
+}
+.ew-app .ew-v161-coordinates a {color:#55e7d3;text-decoration:underline;text-underline-offset:2px;}
+.ew-app .ew-map-selection .ew-v161-coordinates{margin:3px 0 10px;}
+.ew-app .maplibregl-ctrl-scale{border-color:#12343f;background:#ecf6f6cc;color:#092c34;font-size:10px;}

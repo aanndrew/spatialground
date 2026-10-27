@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 308 137" width="1232" height="548" role="img" aria-label="Earth observation satellite, original vector illustration">
+<defs>
+  <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#eef3f0"/><stop offset=".15" stop-color="#b2c2c8"/><stop offset=".38" stop-color="#51656e"/><stop offset=".57" stop-color="#d7dfd9"/><stop offset=".77" stop-color="#899ba5"/><stop offset="1" stop-color="#2e3a48"/></linearGradient>
+  <linearGradient id="bodySide"><stop stop-color="#182833"/><stop offset=".26" stop-color="#88999f"/><stop offset=".58" stop-color="#d3d9d0"/><stop offset=".79" stop-color="#53636c"/><stop offset="1" stop-color="#1d313c"/></linearGradient>
+  <linearGradient id="panel" x1=".15" y1="0" x2=".8" y2="1"><stop stop-color="#1d4965"/><stop offset=".48" stop-color="#071a34"/><stop offset=".87" stop-color="#163958"/><stop offset="1" stop-color="#395d7a"/></linearGradient>
+  <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#203f56"/><stop offset=".5" stop-color="#030b1a"/><stop offset=".77" stop-color="#1d3547"/><stop offset="1" stop-color="#060d16"/></linearGradient>
+  <radialGradient id="lens"><stop stop-color="#1ddbd1"/><stop offset=".28" stop-color="#0a2431"/><stop offset=".7" stop-color="#030b12"/><stop offset="1" stop-color="#101c24"/></radialGradient>
+  <filter id="glow"><feGaussianBlur stdDeviation="2"/></filter>
+  <clipPath id="left"><path d="M2 19 110 39 102 89 0 66Z"/></clipPath>
+  <clipPath id="right"><path d="M175 29 307 65 302 117 171 80Z"/></clipPath>
+</defs>
+<!-- spacecraft is intentionally full vector, drawn in physically plausible perspective; sensor aperture located at image (133,87) -->
+<!-- hinged solar panels, individual cells, tiny conductive grid -->
+<g stroke-linejoin="round">
+ <path d="M2 19 110 39 102 89 0 66Z" fill="url(#panel)" stroke="#a4b8c0" stroke-width="2.4"/>
+ <g clip-path="url(#left)" stroke="#b3c8d0" stroke-width=".58" opacity=".77">
+   <path d="M15 15 13 87 M33 17 30 92 M51 21 49 95 M70 26 68 97 M88 30 85 97 M106 34 102 98"/>
+   <path d="M-6 35 114 59 M-8 51 111 75 M-10 66 105 89"/>
+ </g>
+ <path d="M2 19 110 39" stroke="#e8eef0" stroke-width="1.5" opacity=".7"/>
+ <path d="M175 29 307 65 302 117 171 80Z" fill="url(#glass)" stroke="#92aabb" stroke-width="2.3"/>
+ <g clip-path="url(#right)" stroke="#93b3d0" stroke-width=".65" opacity=".8">
+   <path d="M188 20 183 99 M206 25 201 103 M224 29 218 107 M242 34 236 111 M260 37 253 119 M278 44 270 124 M296 52 288 128"/>
+   <path d="M171 41 311 78 M169 54 309 92 M166 68 307 106 M163 80 306 119"/>
+ </g>
+ <path d="M176 29 307 65" stroke="#e3f0f0" stroke-width="1.35" opacity=".75"/>
+ <path d="M108 47 123 53 123 65 102 58Z M175 44 162 48 163 66 176 62Z" fill="#9db6be" stroke="#334d58" stroke-width="2"/>
+ <path d="M111 47 127 54 M162 52 175 48" fill="none" stroke="#d1e7e6" stroke-width="1.5"/>
+ <!-- wire antenna and space-side rods -->
+ <path d="M145 24 141 4 M145 19 155 9 M143 7 129 9" stroke="#e8f0e5" stroke-width="1.8" fill="none"/>
+ <circle cx="141" cy="4" r="2.8" fill="#e6f1e8" stroke="#536875"/>
+ <path d="M128 16 121 6" stroke="#aec3c4" stroke-width="1.2"/>
+ <!-- bus rear body shading -->
+ <path d="M122 22 Q139 10 161 26 L174 44 165 81 152 100 133 101 116 84 111 50Z" fill="url(#bodySide)" stroke="#142936" stroke-width="3"/>
+ <path d="M129 22 Q141 17 157 26 L166 46 158 85 140 93 122 82 117 51Z" fill="url(#metal)" stroke="#b1bfc3" stroke-width="1.4"/>
+ <path d="M127 24 Q140 20 153 27" fill="none" stroke="#f2fff7" stroke-width="2.1" opacity=".65"/>
+ <path d="M117 41 164 48 M118 55 161 65 M121 71 158 82" stroke="#28414b" stroke-width="2.4" fill="none" opacity=".75"/>
+ <path d="M121 49 162 57 M121 65 159 74" stroke="#e0e7dc" stroke-width=".9" opacity=".6"/>
+ <!-- reflective shielding and segmented latches -->
+ <path d="M120 31 125 34 124 46 119 46Z M160 32 166 38 164 50 160 47Z" fill="#edf5f2" stroke="#526f78" stroke-width=".8"/>
+ <g fill="#0e1d26" stroke="#b9c8c8" stroke-width="1.1"><circle cx="130" cy="40" r="5.6"/><circle cx="150" cy="47" r="4.9"/><circle cx="135" cy="64" r="4.3"/><circle cx="150" cy="70" r="3.1"/></g>
+ <g fill="#80d9e6" opacity=".72"><circle cx="130" cy="40" r="1.6"/><circle cx="150" cy="47" r="1.2"/><circle cx="135" cy="64" r="1.4"/></g>
+ <!-- camera housing, sensor apex precisely at x133,y87 -->
+ <path d="M121 76 141 73 146 91 133 98 116 91Z" fill="#3b5360" stroke="#d5e6e3" stroke-width="1.8"/>
+ <ellipse cx="133" cy="87" rx="12.2" ry="8.6" fill="#07101a" stroke="#d3dad6" stroke-width="2.5"/>
+ <ellipse cx="133" cy="87" rx="7.4" ry="5.4" fill="url(#lens)" stroke="#263e4c" stroke-width="1.1"/>
+ <ellipse cx="133" cy="87" rx="3.3" ry="2.7" fill="#092a32"/>
+ <path d="M125 85 130 83" stroke="#c6feeb" stroke-width=".8" opacity=".8"/>
+ <path d="M116 93 109 101 116 103 128 97 M143 92 155 95 159 104 145 100" fill="#657d88" stroke="#273744" stroke-width="1"/>
+ <circle cx="133" cy="87" r="4" stroke="#22ecdb" stroke-width=".7" opacity=".45" fill="none"/>
+</g>
+</svg>

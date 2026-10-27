@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Environmental Watch | Independent MapLibre Bridge Test</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font:14px/1.5 system-ui,sans-serif;background:#041821;color:#eefbfa}
+header{padding:12px 18px;display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;align-items:center}
+button{background:#10333d;color:white;border:1px solid #347583;border-radius:7px;padding:8px 12px;cursor:pointer}
+button:focus-visible{outline:2px solid #53ebdb}#map{height:calc(100vh - 155px);min-height:350px;background:#e2ebe4}#status{padding:12px 16px;background:#092b36;color:#c7f6f0;white-space:pre-wrap;font:12px/1.5 Consolas,monospace}.warn{color:#ffdba5!important}
+</style></head><body>
+<header><div><strong>Independent MapLibre · Public-module bridge test</strong><div>San Francisco · Liberty basemap · native HTML module loading</div></div>
+<div><button data-zoom="8">Zoom 8</button> <button data-zoom="12">Zoom 12</button> <button data-zoom="16">Zoom 16</button><button data-zoom="18">Zoom 18</button></div></header>
+<div id="map"></div><div id="status" role="status">Loading local MapLibre bridge…</div>
+<link rel="stylesheet" href="/environmental-watch/vendor/maplibre/maplibre-gl.css">
+<script>
+const statusEl = document.querySelector('#status');
+const report=(t,w=false)=>{statusEl.textContent=t;statusEl.classList.toggle('warn',w);};
+window.addEventListener('ew-maplibre-ready',()=>{
+ try{
+  const ml=window.__EW_MAPLIBRE_API__;
+  const map=new ml.Map({container:'map',style:'https://tiles.openfreemap.org/styles/liberty',center:[-122.4194,37.7749],zoom:12,minZoom:1.7,maxZoom:19,attributionControl:true});
+  map.addControl(new ml.NavigationControl(),'top-right');
+  let errors=[];
+  const update=()=>{
+    let visible='unknown';try{visible=String(map.queryRenderedFeatures().length)}catch{}
+    report(`Zoom ${map.getZoom().toFixed(1)} | Center ${map.getCenter().lat.toFixed(4)}, ${map.getCenter().lng.toFixed(4)} | Layers ${map.getStyle()?.layers?.length||0} | Features ${visible} | Tile/style errors ${errors.length}`+(errors.length?'\nLast: '+errors.at(-1):''),errors.length>0);
+  };
+  map.on('idle',update);
+  map.on('error',e=>{errors.push(e.error?.message||String(e.error));update();console.error(e.error)});
+  document.querySelectorAll('[data-zoom]').forEach(b=>b.addEventListener('click',()=>map.easeTo({center:[-122.4194,37.7749],zoom:Number(b.dataset.zoom),duration:200})));
+ }catch(e){report('Map failed: '+(e.message||e),true);console.error(e)}
+},{once:true});
+window.addEventListener('ew-maplibre-error',()=>report('Bridge failed: '+window.__EW_MAPLIBRE_ERROR__,true),{once:true});
+const s=document.createElement('script');s.type='module';s.src='/environmental-watch/ew-maplibre-bridge.mjs';s.onerror=()=>report('Could not load bridge module',true);document.head.appendChild(s);
+setTimeout(()=>{if(statusEl.textContent==='Loading local MapLibre bridge…')report('MapLibre bridge did not respond within 15 seconds',true)},15000);
+</script></body></html>

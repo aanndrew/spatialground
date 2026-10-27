@@ -1,0 +1,4 @@
+/* V1.3b: bundled geographic fallback; maplibre's offline vector style draws on top. */
+#ew-map,#ew-detail-map{background:#082b3e url('/environmental-watch/offline-north-america.svg') center/cover no-repeat!important;}
+.ew-map-help[hidden],#ew-map-help[hidden],#ew-detail-map-warning[hidden]{display:none!important;}
+.ew-maplibre-warning{color:#e4f1ef;font-size:13px;}

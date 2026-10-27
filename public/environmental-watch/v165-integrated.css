@@ -1,0 +1,20 @@
+/* V1.6.5 — small, responsive feed monitor; preserves the V1.5 compact hero & 80/20 grid. */
+.ew-v165-monitor{margin:5px 0 12px;padding:0;background:#082632;border:1px solid #2d5a65;border-radius:8px;color:#d3eded;font-size:12px}
+.ew-v165-summary{display:flex;gap:9px;align-items:center;flex-wrap:wrap;padding:9px 11px;min-height:46px}
+.ew-v165-led{height:9px;width:9px;flex:0 0 9px;background:#42d6c2;border-radius:50%;box-shadow:0 0 10px #2bcab766}
+.ew-v165-has-errors .ew-v165-led{background:#f5b65a;box-shadow:none}
+.ew-v165-activity{min-width:0;flex:1 1 210px;overflow-wrap:anywhere;font-size:12px}
+.ew-v165-clock{white-space:nowrap;color:#a5c0ca}.ew-v165-clock b{color:#72eddd;font-variant-numeric:tabular-nums;font-size:14px;margin-left:5px}
+#ew-v165-toggle{cursor:pointer;border-radius:5px;border:1px solid #37707a;background:#133944;color:#b4f3e9;padding:6px 10px;font:inherit}
+#ew-v165-toggle:hover{border-color:#66e5d5}
+.ew-v165-details{border-top:1px solid #21525c;padding:11px 13px}
+.ew-v165-details[hidden]{display:none!important}.ew-v165-details p{font-size:11px;color:#a4bfca;line-height:1.5;margin:9px 0 0}
+#ew-v165-progress,.ew-v165-sources{display:flex;gap:7px;flex-wrap:wrap}
+.ew-v165-source{border-radius:12px;background:#123b47;border:1px solid #2f6672;padding:5px 9px;color:#d5e7e8;font-size:11px}
+.ew-v165-source.ew-v165-ready{border-color:#398875;color:#7de8bd}.ew-v165-source.ew-v165-failed{border-color:#8d5d40;color:#ffcb91}.ew-v165-source.ew-v165-waiting{color:#a2c4d0}
+.ew-v165-health{margin:7px 0 5px;border-left:3px solid #3d9891;background:#0b303a;padding:8px 10px;color:#bfe4e5;font-size:11px;line-height:1.4;overflow-wrap:anywhere}
+.ew-v165-health.ew-v165-warning{border-color:#e5a361;color:#ffca9f}
+.ew-v165-sources{margin:7px 0}.ew-v165-loading{padding:25px 15px;background:#0b303a;border:1px dashed #36717a;border-radius:8px;color:#a4dad8}
+.ew-v165-basemaps{display:flex!important;gap:0;overflow:hidden}.ew-v165-basemaps button{font:600 11px system-ui,sans-serif;color:#153c45;background:#fff;padding:8px 9px;cursor:pointer;border:0}
+.ew-v165-basemaps button[aria-pressed="true"]{background:#53daca;color:#07333b}
+@media(max-width:700px){.ew-v165-summary{gap:7px}.ew-v165-activity{flex-basis:calc(100% - 18px)}.ew-v165-clock{margin-left:18px}}

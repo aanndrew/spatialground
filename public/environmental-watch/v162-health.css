@@ -1,0 +1,19 @@
+/* V1.6.2: clear, map-adjacent feed diagnostics and genuine hidden popup state. */
+.ew-v162-feed-health {
+  box-sizing: border-box;
+  color: #a8e1e2;
+  background: rgba(4, 33, 43, 0.85);
+  border: 1px solid rgba(80, 208, 205, 0.35);
+  border-radius: 7px;
+  padding: 9px 12px;
+  margin: 9px 0;
+  font-size: 12px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+.ew-v162-feed-health.ew-v162-warning {
+  color: #ffe1a0;
+  border-color: rgba(255, 187, 100, 0.54);
+  background: rgba(63, 42, 24, 0.65);
+}
+#ew-map-selection[hidden] { display: none !important; }

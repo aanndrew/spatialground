@@ -1,0 +1,24 @@
+/* Keep the working dashboard unchanged. Event Details uses one floating return. */
+.ew-app[data-page="detail"] .ew-nav {display:none!important;}
+.ew-app[data-page="detail"] .ew-detail-container {padding-top:64px;}
+.ew-app[data-page="detail"] .ew-return {
+  position:fixed; top:12px; left:14px; z-index:999;
+  display:inline-flex; align-items:center;
+  border:1px solid #307780; border-radius:8px;
+  padding:9px 13px; background:#062430ed;
+  box-shadow:0 6px 20px #0008;color:#65ebdc!important;
+  font-size:12px;font-weight:700;
+}
+.ew-app[data-page="detail"] .ew-return:hover {background:#10414a;border-color:#5ee9df;}
+/* Native point marker remains on the map even if HTML icon transforms fail. */
+.ew-app[data-page="detail"] .ew-detail-map .maplibregl-marker.ew171-detail-marker,
+.ew-app[data-page="detail"] .ew171-detail-marker {z-index:15!important;visibility:visible!important;opacity:1!important;}
+.ew-app[data-page="detail"] .ew171-detail-marker .ew171-glyph {
+  width:46px;height:46px;display:grid;place-items:center;
+  background:#082632;color:#fff;border:3px solid var(--ew171-color,#4ce2d0);
+  border-radius:50%;box-shadow:0 0 0 6px #08263286,0 0 20px var(--ew171-color,#4ce2d0);
+  font-weight:800;font-size:25px;
+}
+.ew-app[data-page="detail"] .ew171-detail-marker svg {display:block;width:27px;height:27px;stroke:#fff;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;}
+.ew171-source-note{font-size:12px;color:#b7d0d1;margin:8px 0;padding:8px 10px;border-left:2px solid #55d8ca;background:#0b3137;}
+@media(max-width:640px){.ew-app[data-page="detail"] .ew-return{top:8px;left:8px;padding:8px 10px}.ew-app[data-page="detail"] .ew-detail-container{padding-top:61px}}

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Environmental Watch | Independent Map Test</title>
+<link rel="stylesheet" href="/environmental-watch/vendor/maplibre/maplibre-gl.css">
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font:14px/1.5 system-ui,sans-serif;background:#041821;color:#eefbfa}
+header{padding:12px 18px;display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;align-items:center}
+strong{font-size:17px}small{display:block;color:#9fc8cb}button{font:600 13px system-ui;background:#10333d;color:#e8f9f6;border:1px solid #347583;border-radius:7px;padding:8px 12px;cursor:pointer}
+button:hover,button:focus-visible{background:#49dccb;color:#043137}#map{height:calc(100vh - 170px);min-height:365px;background:#deebdf}#status{padding:10px 16px;background:#092b36;color:#c7f6f0;white-space:pre-wrap;font:12px/1.5 Consolas,monospace}
+.warning{color:#ffdba5!important}a{color:#6de9da}
+</style></head><body>
+<header>
+<div><strong>Environmental Watch · Independent MapLibre Test v1.6.10.1</strong><small>Own local JS / worker / CSS · OpenFreeMap Liberty · San Francisco</small></div>
+<div><button data-zoom="8">SF Zoom 8</button> <button data-zoom="12">SF Zoom 12</button> <button data-zoom="16">SF Zoom 16</button> <button id="reset">Reset</button></div>
+</header>
+<div id="map" aria-label="San Francisco independent MapLibre map"></div>
+<div id="status" role="status">Starting…</div>
+<script type="module">
+const out=document.querySelector('#status');let map=null;let errors=[];
+function write(s,isWarning=false){out.textContent=s;out.classList.toggle('warning',isWarning);}
+try {
+  const root='/environmental-watch/vendor/maplibre/';
+  const ml=await import(root+'maplibre-gl.mjs');
+  if(typeof ml.setWorkerUrl==='function')ml.setWorkerUrl(root+'maplibre-gl-worker.mjs');
+  map=new ml.Map({container:'map',style:'https://tiles.openfreemap.org/styles/liberty',center:[-122.4194,37.7749],zoom:12,minZoom:1.7,maxZoom:19,attributionControl:true});
+  map.addControl(new ml.NavigationControl(),'top-right');
+  const report=()=>{
+    let count='unavailable';try {count=String(map.queryRenderedFeatures().length)}catch{}
+    write('Zoom '+map.getZoom().toFixed(1)+' | center '+map.getCenter().lat.toFixed(4)+', '+map.getCenter().lng.toFixed(4)+' | style layers '+(map.getStyle()?.layers?.length||0)+' | visible features '+count+' | errors '+errors.length+(errors.length?'\nLatest error: '+errors.at(-1):''),errors.length>0);
+  };
+  map.on('load',()=>write('Map style loaded. Rendering San Francisco streets…'));
+  map.on('idle',report);
+  map.on('error',e=>{errors.push(e.error?.message||String(e.error));report();console.error('[EW independent basemap test]',e.error);});
+  document.querySelectorAll('[data-zoom]').forEach(b=>b.addEventListener('click',()=>map.easeTo({center:[-122.4194,37.7749],zoom:Number(b.dataset.zoom),duration:300})));
+  document.getElementById('reset').addEventListener('click',()=>map.jumpTo({center:[-122.4194,37.7749],zoom:12}));
+}catch(e){write('Map failed to start: '+(e?.message||String(e)),true);console.error(e);}
+</script></body></html>

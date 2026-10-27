@@ -1,0 +1,18 @@
+/* V1.6.8: one basemap control, Liberty vector tiles, reliable resize & visible diagnostics. */
+.ew-app .maplibregl-canvas.ew-map-muted { filter:none !important; }
+.ew-app .maplibregl-canvas.ew168-map-contrast { filter:brightness(1.08) saturate(1.12) contrast(1.14) !important; }
+.ew-app .maplibregl-canvas.ew168-map-muted { filter:brightness(.88) saturate(.83) contrast(1.07) !important; }
+.ew-app .ew168-control.maplibregl-ctrl {display:flex;flex-direction:column;align-items:flex-start;gap:5px;max-width:min(340px,calc(100vw - 80px));background:transparent;border:0;box-shadow:none;pointer-events:none;}
+.ew-app .ew168-control > * { pointer-events:auto; }
+.ew-app .ew168-appearance {display:flex;overflow:hidden;max-width:100%;border:1px solid #41b5ab;border-radius:7px;background:#08232cef;box-shadow:0 4px 14px #001d28a6;}
+.ew-app .ew168-mode {border:0;border-right:1px solid #27515b;background:transparent;color:#d9f3f0;padding:7px 9px;min-width:55px;font-size:11px;font-weight:700;}
+.ew-app .ew168-mode:last-child {border-right:0;}
+.ew-app .ew168-mode.is-selected,.ew-app .ew168-mode:hover {background:#46d6cb;color:#082329;}
+.ew-app .ew168-map-meta {padding:4px 8px;border:1px solid #28616a;border-radius:5px;background:#071f28e8;color:#c5e4e5;font:600 10px/1.35 Inter,'Segoe UI',sans-serif;white-space:nowrap;}
+.ew-app .ew168-map-actions button {font-size:10px;font-weight:700;line-height:1.4;border:1px solid #386b72;border-radius:5px;background:#092c34e8;color:#c9e9e8;padding:4px 9px;}
+.ew-app .ew168-map-actions button:hover {border-color:#54dfd3;color:white;}
+.ew-app .ew168-map-warning {display:flex;flex-wrap:wrap;gap:7px;align-items:center;background:#4b281cfa;color:#ffdeba;border:1px solid #e3a05d;border-radius:6px;padding:8px 10px;font:600 11px/1.4 Inter,'Segoe UI',sans-serif;max-width:300px;}
+.ew-app .ew168-map-warning[hidden] {display:none!important;}
+.ew-app .ew168-map-warning button {background:#ffd49b;color:#332015;border:0;border-radius:4px;padding:4px 8px;font-size:11px;font-weight:800;}
+.ew-app .maplibregl-ctrl-top-left {z-index:3;}
+@media(max-width:600px){.ew-app .ew168-control.maplibregl-ctrl{max-width:calc(100vw - 95px)}.ew-app .ew168-mode{min-width:0;padding:7px 8px}.ew-app .ew168-map-meta{font-size:9px}}

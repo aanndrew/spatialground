@@ -1,0 +1,15 @@
+/* V1.3c interactive offline geography overlay, above the GL canvas. */
+#ew-map .ew-projected-atlas,
+#ew-detail-map .ew-projected-atlas {
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  z-index:1!important;
+  pointer-events:none!important;
+  opacity:1!important;
+  display:block!important;
+}
+/* The HTML incident markers must always appear above the geographic SVG. */
+#ew-map .maplibregl-marker,
+#ew-detail-map .maplibregl-marker{z-index:2!important;}
