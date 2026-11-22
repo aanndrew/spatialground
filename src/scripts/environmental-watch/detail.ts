@@ -4,13 +4,13 @@ const root=document.querySelector<HTMLElement>('.ew-app[data-page="detail"]');
 if(root){
   const q=new URLSearchParams(location.search);
   const source=q.get('source'), id=q.get('id');
-  const dashboardHref=source==='demo'?'/environmental-watch/?demo=1#ew-live-map':'/environmental-watch/#ew-live-map';
+  const dashboardHref='/environmental-watch/#ew-live-map';
   document.querySelectorAll<HTMLAnchorElement>('.ew-return,.ew-back-site,.ew-detail-return-float').forEach(link=>{link.href=dashboardHref;});
   const byId=(id:string)=>document.getElementById(id)!;
   const setText=(id:string,t:string)=>{byId(id).textContent=t;};
   async function get():Promise<EnvironmentalEvent|null>{
     if(!id||!source)return null;
-    if(source==='demo')return DEMO_EVENTS.find(e=>e.id===id)||null;
+    if(source==='demo')return null; // EW-V1614-NO-SAMPLE
     if(source==='eonet'){
       if(!/^[\w-]{1,100}$/.test(id))return null;
       const r=await fetch(`https://eonet.gsfc.nasa.gov/api/v3/events/${encodeURIComponent(id)}`);

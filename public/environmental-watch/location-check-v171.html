@@ -3,7 +3,8 @@
 <link rel="stylesheet" href="/environmental-watch/vendor/maplibre/maplibre-gl.css">
 <style>
 :root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#041920;color:#e8faf8;font:14px/1.5 Inter,system-ui,sans-serif}header{padding:14px 20px;background:#062b36;border-bottom:1px solid #29676f}h1{margin:0;font-size:21px}.muted{color:#a4c5c9;font-size:12px}.shell{display:grid;grid-template-columns:minmax(0,2fr) minmax(280px,1fr);min-height:calc(100vh - 85px)}#map{height:calc(100vh - 85px);min-height:400px;background:#e6ece7}.panel{padding:18px 20px;background:#082732;border-left:1px solid #24505a}strong{color:#f2ffff}p{margin:0 0 14px}.pill{display:inline-block;background:#123c43;border:1px solid #307983;color:#d9f8f3;padding:7px 10px;border-radius:7px;font-weight:700;margin:2px}.btn{display:inline-block;border:1px solid #40a39f;border-radius:6px;padding:8px 10px;color:#06292b;background:#58ddcd;cursor:pointer;text-decoration:none;font-weight:800;margin:3px}#qa{padding:12px;border:1px solid #285861;border-radius:6px;background:#103943;white-space:pre-wrap;overflow-wrap:anywhere}#error{color:#ffbf95}small{color:#a4c5c9}.point{width:28px;height:28px;background:#07232d;border:4px solid #ffb44f;border-radius:50%;box-shadow:0 0 0 8px #ffc45277,0 0 22px #ffb44f}.hint{border-left:2px solid #ffc35d;padding-left:10px}.link{color:#61e5da;overflow-wrap:anywhere}@media(max-width:800px){.shell{display:block}#map{height:52vh;min-height:330px}.panel{border-left:0;border-top:1px solid #24505a}}
-</style></head><body>
+</style>  <link rel="icon" type="image/svg+xml" href="/spatialground-sr-topography.svg" />
+</head><body>
 <header><h1>SpatialGround · Source Coordinate Check</h1><div class="muted">Independent event point viewer — not an incident perimeter or damage map</div></header>
 <div class="shell"><div id="map"></div><aside class="panel"><h2 id="name">Checking event location</h2><p id="coords">—</p><p id="source" class="muted"></p><div><button class="btn" data-zoom="8">Zoom 8</button><button class="btn" data-zoom="12">Zoom 12</button><button class="btn" data-zoom="16">Zoom 16</button></div><h3>Official source cross-check</h3><div id="qa" role="status">Loading…</div><p class="hint" style="margin-top:15px">Coordinates may represent the event observation point, epicenter, or an approximate reporting location. Matching an official point does not establish an affected area or precise incident boundary.</p><p><a class="link" id="official" target="_blank" rel="noopener noreferrer" hidden>Open original agency record ↗</a></p><p><a class="link" href="/environmental-watch/">Back to Environmental Watch</a></p><small>Uses the independent Environmental Watch MapLibre engine and OpenFreeMap basemap; does not use OpenStreetMap's web viewer.</small></aside></div>
 <script>
@@ -69,4 +70,6 @@
  const s=document.createElement('script');s.type='module';s.src='/environmental-watch/ew-maplibre-bridge.mjs';s.onerror=()=>report('Local map bridge could not load');document.head.appendChild(s);
  verify();
 })();
-</script></body></html>
+</script><!-- SPATIALGROUND_COPY_GUARD_V1 -->
+<script src="/site-protection.js" defer></script>
+</body></html>

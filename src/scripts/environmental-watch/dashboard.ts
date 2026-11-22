@@ -7,7 +7,7 @@ if(root){
   const byId=(id:string)=>document.getElementById(id)!;
   let ml: typeof import('maplibre-gl') | null = null;
   const state:{events:EnvironmentalEvent[];mode:'live'|'demo';category:string;days:number;map:maplibregl.Map|null;markers:maplibregl.Marker[];errors:string[];group:'all'|'natural'|'human';}={
-    events:[],mode:new URLSearchParams(location.search).get('demo')==='1'?'demo':'live',category:'all',days:30,map:null,markers:[],errors:[],group:'all'
+    events:[],mode:'live' /* EW-V1614-LIVE-ONLY */,category:'all',days:30,map:null,markers:[],errors:[],group:'all'
   };
   function el(tag:string,cls='',text=''):HTMLElement {
     const node=document.createElement(tag); if(cls)node.className=cls;if(text)node.textContent=text;return node;
@@ -220,6 +220,45 @@ if(root){
 
       // EW-V168-MAP-REPAIR: one control supplied by installEnvironmentalMapTheme.
 
+      // EW-V1613-ZOOM-AND-READY: visible right-center zoom buttons; no engine/style changes.
+      {
+        const ewMap=state.map;
+        if(ewMap){
+          const host=ewMap.getContainer();
+          if(!host.querySelector('#ew1613-zoom')){
+            const buttons=document.createElement('div');
+            buttons.id='ew1613-zoom';
+            buttons.className='ew1613-zoom';
+            buttons.setAttribute('role','group');
+            buttons.setAttribute('aria-label','Map zoom controls');
+            const createButton=(label:string,caption:string,action:()=>void)=>{
+              const button=document.createElement('button');
+              button.type='button';button.textContent=label;
+              button.setAttribute('aria-label',caption);button.title=caption;
+              button.addEventListener('click',(event)=>{event.stopPropagation();action();});
+              buttons.appendChild(button);return button;
+            };
+            const up=createButton('+','Zoom in',()=>ewMap.zoomIn({duration:220}));
+            const down=createButton('−','Zoom out',()=>ewMap.zoomOut({duration:220}));
+            const sync=()=>{
+              const zoom=ewMap.getZoom();
+              up.disabled=zoom >= ewMap.getMaxZoom()-0.001;
+              down.disabled=zoom <= ewMap.getMinZoom()+0.001;
+            };
+            ewMap.on('zoom',sync);sync();host.appendChild(buttons);
+          }
+          // Only hide the outdated fallback when MapLibre actually loaded its style.
+          const clearStaleHelp=()=>{
+            if(!ewMap.isStyleLoaded())return;
+            const help=document.getElementById('ew-map-help');
+            if(help){help.hidden=true;help.style.display='none';}
+          };
+          ewMap.on('load',clearStaleHelp);
+          ewMap.on('style.load',clearStaleHelp);
+          ewMap.on('idle',clearStaleHelp);
+          clearStaleHelp();
+        }
+      }
       state.map.addControl(new ml.NavigationControl({showCompass:false}),'bottom-left');
       installEnvironmentalMapTheme(state.map);
       state.map.addControl(new ml.AttributionControl({compact:true}),'bottom-right');
@@ -277,6 +316,7 @@ if(root){
   });
   for(const b of document.querySelectorAll<HTMLElement>('[data-days]')) b.addEventListener('click',()=>{state.days=Number(b.dataset.days)||30;render();rangeHint();});
   byId('ew-refresh').addEventListener('click',load);
+  { const canonical=new URL(location.href); if(canonical.searchParams.has('demo')){canonical.searchParams.delete('demo');history.replaceState({},'',canonical);} }
   initMap();void load();
   function checkDue(){if(state.mode==='live'&&document.visibilityState==='visible'&&nextAt>0&&Date.now()>=nextAt&&!loading)void load();}
   setInterval(checkDue,1000);

@@ -1,0 +1,34 @@
+/* Environmental Watch v1.6.13: Dashboard zoom. Does NOT alter MapLibre style or markers. */
+.ew-app[data-page="dashboard"] #ew-map{position:relative;}
+.ew-app[data-page="dashboard"] #ew-map .ew1613-zoom{
+  position:absolute;right:14px;top:50%;transform:translateY(-50%);z-index:70;
+  display:flex;flex-direction:column;overflow:hidden;
+  background:#fff;border:1px solid #c3d0d0;border-radius:7px;
+  box-shadow:0 2px 10px #001b2390;pointer-events:auto;
+}
+.ew-app[data-page="dashboard"] #ew-map .ew1613-zoom button{
+  all:unset;box-sizing:border-box;cursor:pointer;display:grid;place-items:center;
+  width:42px;height:44px;text-align:center;font-family:Arial,sans-serif;
+  font-size:27px;font-weight:700;line-height:1;color:#21323a;
+  background:#fff;user-select:none;-webkit-user-select:none;
+}
+.ew-app[data-page="dashboard"] #ew-map .ew1613-zoom button+button{border-top:1px solid #dce4e7;}
+.ew-app[data-page="dashboard"] #ew-map .ew1613-zoom button:hover:not(:disabled){background:#e9f8f6;}
+.ew-app[data-page="dashboard"] #ew-map .ew1613-zoom button:focus-visible{outline:3px solid #37cfc0;outline-offset:-4px;}
+.ew-app[data-page="dashboard"] #ew-map .ew1613-zoom button:disabled{opacity:.36;cursor:default;}
+@media(max-width:600px){.ew-app[data-page="dashboard"] #ew-map .ew1613-zoom{right:10px;}}
+/* These are plain data-attribution slots, not SpatialGround co-branding. */
+.ew-app[data-page="dashboard"] .ew-v15-source-mark.ew1613-agency-logo{
+  background:transparent!important;border:none!important;box-shadow:none!important;
+  overflow:visible!important;display:flex;align-items:center;justify-content:center;
+}
+.ew-app[data-page="dashboard"] .ew-v15-source-mark.ew1613-agency-logo img{
+  display:block;width:100%;height:100%;max-height:100%;object-fit:contain;
+  border:0;filter:none;box-shadow:none;
+}
+.ew-app[data-page="dashboard"] .ew1613-agency-domain{
+  display:inline-block;margin-top:3px;font-size:10px;letter-spacing:.015em;color:#8dbbc6;
+}
+.ew-app[data-page="dashboard"] .ew1613-attribution-note{
+  margin:8px 2px 0;color:#82adb5;font-size:10px;line-height:1.45;
+}

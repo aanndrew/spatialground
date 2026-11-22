@@ -1,5 +1,5 @@
 ---
-// Isolated test route; does not modify the existing 9-card portfolio.
+// Environmental Watch production dashboard.
 const pageTitle = 'North America Environmental Watch | SpatialGround';
 ---
 <!doctype html>
@@ -22,6 +22,9 @@ const pageTitle = 'North America Environmental Watch | SpatialGround';
   <link rel="stylesheet" href="/environmental-watch/v165-integrated.css" />
   <link rel="stylesheet" href="/environmental-watch/v167-refined.css" />
   <link rel="stylesheet" href="/environmental-watch/v168-map.css" />
+  <link rel="stylesheet" href="/environmental-watch/v1613-ui.css" />
+  <link rel="stylesheet" href="/environmental-watch/v1614-water.css" />
+  <link rel="icon" type="image/svg+xml" href="/spatialground-sr-topography.svg" />
 </head>
 <body class="ew-body">
 <div class="ew-app" data-page="dashboard">
@@ -89,21 +92,46 @@ const pageTitle = 'North America Environmental Watch | SpatialGround';
       <div class="ew-stat"><div class="ew-stat-icon ew-teal">◷</div><div><strong id="ew-kpi-update">—</strong><span>Refresh interval / mode</span></div></div>
     </section>
     <section class="ew-panel ew-feature" id="ew-feature">
-      <div class="ew-panel-bar"><h2>01 / Featured Environmental Issue</h2><a href="https://www.drought.gov/" target="_blank" rel="noopener noreferrer">Official drought data ↗</a></div>
-      <div class="ew-feature-layout">
-        <div class="ew-feature-copy"><span class="ew-eyebrow">LONG-TERM ENVIRONMENTAL PRESSURE</span><h3>Drought &amp; Water Stress</h3><h4>Across North America</h4>
-          <p>Drought affects freshwater resources, vegetation, habitats and communities. Explore monitored conditions through official drought services.</p>
-          <div class="ew-note">This V1 feature is editorial context, <b>not a live drought severity map</b>. Quantitative GIS drought layers are planned for a later release.</div>
-          <a class="ew-primary-link" href="https://www.drought.gov/" target="_blank" rel="noopener noreferrer">Explore Drought.gov ↗</a>
-        </div>
-        <div class="ew-feature-art" role="img" aria-label="Stylized landscape graphic with contour-like lines; not actual drought measurements">
-          <div class="ew-feature-orbit"></div><div class="ew-feature-abstract-map"></div><div class="ew-feature-art-label">WATER · LAND · ECOSYSTEMS<br/><small>Illustrative visualization, not measured GIS data</small></div>
-        </div>
+  <div class="ew-panel-bar"><h2>01 / Featured Environmental Issue</h2><span class="ew-caption">U.S. water conditions</span></div>
+  <div id="ew1614-water" class="ew1614-water">
+    <div class="ew1614-tabs" role="group" aria-label="Water condition layers">
+      <button type="button" data-water="auto" aria-pressed="true">Auto</button>
+      <button type="button" data-water="drought" aria-pressed="false">Drought</button>
+      <button type="button" data-water="flood" aria-pressed="false">Flood</button>
+      <button type="button" id="ew1614-refresh" aria-label="Refresh water data">↻ Refresh</button>
+    </div>
+    <div class="ew1615-summary" id="ew1615-summary" aria-live="polite">
+      <span id="ew1615-reason">Auto · Waiting for official observations</span>
+      <div class="ew1615-feeds"><span id="ew1615-drought-state">Drought · Waiting</span><span id="ew1615-flood-state">Flood · Waiting</span></div>
+    </div>
+    <div class="ew1614-layout">
+      <div class="ew1614-copy">
+        <span class="ew-eyebrow">WATER · LAND · ECOSYSTEMS</span>
+        <h3 id="ew1614-title">Drought &amp; Water Stress</h3>
+        <p id="ew1614-desc">Current U.S. Drought Monitor classifications. D0 is abnormal dryness; D1–D4 indicate drought intensity.</p>
+        <div id="ew1614-status" role="status" aria-live="polite">Waiting to load official water data…</div>
+        <div id="ew1614-legend" class="ew1614-legend"></div>
+        <a id="ew1614-source" class="ew-primary-link" href="https://www.drought.gov/data-maps-tools/us-drought-monitor-usdm" target="_blank" rel="noopener noreferrer">Official source ↗</a>
+        <p class="ew1614-limit">U.S. monitoring coverage; not a complete North American water-stress assessment or emergency warning. Water layers are independent of the event-date filters below.</p>
       </div>
-    </section>
+      <div class="ew1618-map-group">
+        <div class="ew1614-map-wrap"><div id="ew1614-map" aria-label="Interactive water conditions map"></div></div>
+        <p class="ew1618-map-credit" aria-label="Water map data and attribution">
+          <a href="https://maplibre.org/" target="_blank" rel="noopener noreferrer">MapLibre</a> ·
+          <a href="https://openfreemap.org/" target="_blank" rel="noopener noreferrer">OpenFreeMap</a> ·
+          <a href="https://openmaptiles.org/" target="_blank" rel="noopener noreferrer">© OpenMapTiles</a> ·
+          <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">© OpenStreetMap contributors</a><br />
+          Water layers: <a href="https://droughtmonitor.unl.edu/" target="_blank" rel="noopener noreferrer">U.S. Drought Monitor</a> ·
+          <a href="https://water.noaa.gov/" target="_blank" rel="noopener noreferrer">NOAA / NWS NWPS</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
     <section class="ew-panel ew-map-section" id="ew-live-map">
       <div class="ew-panel-bar ew-map-title"><div><h2>02 / Interactive Event Map</h2><p>NASA EONET, USGS M5+ earthquakes and NOAA oil/chemical reports · up to 90 days</p></div>
-        <div class="ew-control-group"><button type="button" class="ew-small-btn is-selected" data-mode="live">Live</button><button type="button" class="ew-small-btn" data-mode="demo">Demo</button><button type="button" class="ew-small-btn" id="ew-refresh" title="Fetch public feeds again">↻ Refresh</button></div>
+        <div class="ew-control-group"><button type="button" class="ew-small-btn is-selected" data-mode="live">Live</button><button type="button" class="ew-small-btn" id="ew-refresh" title="Fetch public feeds again">↻ Refresh</button></div>
       </div>
       <div class="ew-map-toolbar"><div id="ew-filters" class="ew-filters" aria-label="Filter events by category"></div><div class="ew-control-group"><button type="button" class="ew-small-btn" data-days="7">7 days</button><button type="button" class="ew-small-btn is-selected" data-days="30">30 days</button></div></div>
       <div class="ew-map-shell"><div id="ew-map" class="ew-map" aria-label="Interactive North America event map"></div>
@@ -128,14 +156,18 @@ const pageTitle = 'North America Environmental Watch | SpatialGround';
     </section>
     <section class="ew-panel ew-sources" id="ew-sources">
       <div class="ew-panel-bar"><h2>05 / Data Sources &amp; Methodology</h2><span class="ew-caption">Transparent data provenance</span></div>
-      <div class="ew-source-grid"><a href="https://eonet.gsfc.nasa.gov/" target="_blank" rel="noopener noreferrer"><strong>NASA EONET</strong><span>Curated, open natural events</span></a><a href="https://earthquake.usgs.gov/earthquakes/feed/" target="_blank" rel="noopener noreferrer"><strong>USGS</strong><span>M5.0+ earthquakes, up to 90 days</span></a><a href="https://www.drought.gov/" target="_blank" rel="noopener noreferrer"><strong>Drought.gov</strong><span>Background drought context</span></a><a href="https://www.noaa.gov/" target="_blank" rel="noopener noreferrer"><strong>NOAA IncidentNews</strong><span>Oil / chemical notifications; synchronized snapshot</span></a></div>
-      <p class="ew-footnote">V1 scope: NASA EONET open records and USGS earthquake observations and selected NOAA notifications. Geography uses a broad North America bounding box, including offshore observations. “Open” is NASA's catalog status; an earthquake is an observation, not an active emergency. Not all ecological hazards are represented. Updates are fetched by the visitor's browser, with no Cloudflare Worker or server-side cache in V1.</p>
+      <div class="ew-source-grid"><a href="https://eonet.gsfc.nasa.gov/" target="_blank" rel="noopener noreferrer"><strong>NASA EONET</strong><span>Curated, open natural events</span></a><a href="https://earthquake.usgs.gov/earthquakes/feed/" target="_blank" rel="noopener noreferrer"><strong>USGS</strong><span>M5.0+ earthquakes, up to 90 days</span></a><a href="https://www.drought.gov/" target="_blank" rel="noopener noreferrer"><strong>Drought.gov</strong><span>Weekly U.S. drought classifications via the featured map</span></a><a href="https://www.noaa.gov/" target="_blank" rel="noopener noreferrer"><strong>NOAA IncidentNews</strong><span>Oil / chemical notifications; synchronized snapshot</span></a></div>
+      <p class="ew-footnote">Coverage: NASA EONET natural events, USGS M5.0+ earthquake observations and selected NOAA IncidentNews notifications. Event date filters cover up to 90 days where records are available. The geographic screening area includes offshore observations. The featured U.S. drought and river-stage layers are separate from the event filters. Source dates and update schedules differ. Reported points are not incident footprints or emergency warnings. NOAA IncidentNews uses a synchronized snapshot. This independent site is not a comprehensive hazard or emergency alert service.</p>
     </section>
   </main>
-  <footer class="ew-footer">© SpatialGround · Environmental Watch V1 Test Build <span>Independent prototype — no changes to your existing portfolio cards</span></footer>
+  <footer class="ew-footer">© SpatialGround · Environmental Watch <span>Independent environmental monitoring · Not an emergency alert service</span></footer>
 </div>
 <script>import '../../scripts/environmental-watch/dashboard.ts';</script>
   <script is:inline src="/environmental-watch/v15-layout.js"></script><script is:inline src="/environmental-watch/v165-integrated.js"></script><script is:inline src="/environmental-watch/v167-refined.js"></script>
   <script is:inline src="/environmental-watch/v171-geography.js"></script>
+  <script is:inline src="/environmental-watch/v1613-agencies.js"></script>
+<!-- SPATIALGROUND_COPY_GUARD_V1 -->
+<script is:inline src="/site-protection.js"></script>
+  <script is:inline type="module" src="/environmental-watch/v1614-water.mjs"></script>
 </body>
 </html>

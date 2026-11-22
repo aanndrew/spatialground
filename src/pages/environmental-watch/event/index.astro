@@ -13,6 +13,7 @@ const pageTitle = 'Event Details | SpatialGround Environmental Watch';
   <link rel="stylesheet" href="/environmental-watch/v168-map.css" />
 <link rel="stylesheet" href="/environmental-watch/v171-event.css" />
 <link rel="stylesheet" href="/environmental-watch/v1711-marker.css" />
+  <link rel="icon" type="image/svg+xml" href="/spatialground-sr-topography.svg" />
 </head><body class="ew-body"><div class="ew-app" data-page="detail">
 
 <main class="ew-container ew-detail-container"><a class="ew-return" href="/environmental-watch/#ew-live-map">← Back to Environmental Watch</a>
@@ -26,13 +27,15 @@ const pageTitle = 'Event Details | SpatialGround Environmental Watch';
 <div class="ew-subpanel"><h3>Event summary</h3><p id="ew-detail-desc">—</p><p class="ew-muted" id="ew-detail-record">—</p></div></section>
 <section class="ew-panel" id="location"><div class="ew-panel-bar"><h2>Location &amp; Geographic Context</h2><span class="ew-caption" id="ew-detail-coords">—</span></div>
 <div class="ew-detail-map-shell"><div id="ew-detail-map" class="ew-detail-map"></div><div class="ew-map-help" id="ew-detail-map-warning" hidden>Map tiles unavailable. Original source links below remain accessible.</div></div>
-<p class="ew-footnote">The marker represents the reported coordinate / approximate geographic center of the source event. It is <b>not</b> a wildfire perimeter, inundation boundary, damage area or risk forecast. V1 does not yet include active fire perimeters or satellite imagery overlays.</p></section>
+<p class="ew-footnote">The marker represents the reported coordinate / approximate geographic center of the source event. It is <b>not</b> a wildfire perimeter, inundation boundary, damage area or risk forecast. This event map does not display active fire perimeters or satellite imagery overlays.</p></section>
 <section class="ew-panel" id="impacts"><div class="ew-panel-bar"><h2>Potential Ecological Impacts</h2><span class="ew-caption">General context, not confirmed damage</span></div><div class="ew-impact-tiles"><div class="ew-impact-icon">❧</div><div><h3>Environmental considerations</h3><ul id="ew-impact-list"></ul></div></div><p class="ew-footnote">These are general mechanisms relevant to this event category, not measured impacts specific to this incident. Additional GIS analysis would be required to verify effects.</p></section>
 <section class="ew-panel" id="sources"><div class="ew-panel-bar"><h2>Data Sources &amp; Original Records</h2><span class="ew-caption">Traceable public data</span></div>
 <div class="ew-source-detail"><strong>Official event record</strong><a id="ew-detail-link" target="_blank" rel="noopener noreferrer">Open source ↗</a></div>
 <p class="ew-footnote">Event records are retrieved on demand. Data may change, be corrected or become unavailable. For emergency safety instructions, consult the responsible local authority; this research portfolio is not an alert service.</p><a class="ew-primary-link" id="ew-detail-link2" target="_blank" rel="noopener noreferrer">Read original record ↗</a></section>
-</div></main><footer class="ew-footer">SpatialGround · Environmental Watch V1 <span>GIS portfolio prototype</span></footer>
+</div></main><footer class="ew-footer">© SpatialGround · Environmental Watch <span>Independent environmental monitoring · Not an emergency alert service</span></footer>
 </div><script>import '../../../scripts/environmental-watch/detail.ts';</script>  
   <script is:inline src="/environmental-watch/v167-refined.js"></script>
 <script is:inline src="/environmental-watch/v171-geography.js"></script>
+<!-- SPATIALGROUND_COPY_GUARD_V1 -->
+<script is:inline src="/site-protection.js"></script>
 </body></html>
