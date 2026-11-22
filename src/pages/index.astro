@@ -59,10 +59,11 @@ const projects = [
   },
   {
     number: "09",
-    location: "PROJECT PLACEHOLDER",
-    title: "Future Project",
-    tags: "Upcoming environmental GIS work",
-    className: "placeholderNine",
+    location: "NORTH AMERICA",
+    title: "Environmental Watch",
+    tags: "Earth Observation · Natural Hazards · Live GIS",
+    className: "environmentalWatch",
+    href: "https://spatialground.earth/environmental-watch/",
   },
 ];
 ---
@@ -101,6 +102,7 @@ const projects = [
                 <article
                   class={`card ${project.className}`}
                   data-index={index}
+                  data-href={project.href || undefined}
                 >
                   {index === 0 ? (
                     <iframe class="hawaii-v7-frame" src="/hawaii-v7-ring.html" title="Hawaiʻi Island V7 animated artwork" tabindex="-1" aria-hidden="true"></iframe>
@@ -109,6 +111,17 @@ const projects = [
                   )}
                   {index !== 0 && <div class="shade"></div>}
 
+                  {index === 8 ? (
+                    <div class="watch-content">
+                      <div class="watch-top"><span>09 / NORTH AMERICA</span><span class="watch-live"><i></i> LIVE DATA</span></div>
+                      <div class="watch-bottom">
+                        <h2><span>ENVIRONMENTAL</span><strong>WATCH</strong></h2>
+                        <p class="watch-description">Real-time environmental monitoring across North America.</p>
+                        <p class="watch-tags">{project.tags}</p>
+                        <div class="watch-link">{project.href ? "Explore Live Dashboard ↗" : "Dashboard · Coming Soon"}</div>
+                      </div>
+                    </div>
+                  ) : (
                   <div class={index === 0 ? "content lava-original-hidden" : "content"}>
                     <div class="number">{project.number}</div>
 
@@ -120,6 +133,7 @@ const projects = [
                       <div class="view">{index === 0 ? "VIEW PROJECT →" : "COMING SOON"}</div>
                     </div>
                   </div>
+                  )}
                 </article>
               ))
             }
@@ -338,6 +352,8 @@ const projects = [
           goTo(index); // A visible side/rear card becomes active immediately.
         } else if (index === 0) {
           window.location.assign("/projects/hawaii-lava-risk/");
+        } else if (index === 8 && (cards[index] as HTMLElement).dataset.href) {
+          window.location.assign("https://spatialground.earth/environmental-watch/");
         }
       }
 
@@ -406,7 +422,9 @@ const projects = [
 
       updateCards();
     </script>
-  </body>
+  <!-- SPATIALGROUND_COPY_GUARD_V1 -->
+<script is:inline src="/site-protection.js"></script>
+</body>
 </html>
 
 <style>
@@ -1010,4 +1028,26 @@ const projects = [
     .about-summary { font-size: .68rem; }
   }
   @media (max-width: 390px) { .about-summary { font-size: .6rem; } }
+
+  /* Card 09 — independent artwork and typography. */
+  .card.environmentalWatch { container-type: size; background:#030914; }
+  .environmentalWatch .visual { background: url('/images/environmental-watch-card.jpg') center / cover no-repeat; transition: transform 600ms ease; }
+  .environmentalWatch .shade { background: linear-gradient(180deg,rgba(0,5,14,.36),transparent 28%,transparent 36%,rgba(0,5,14,.72) 78%,rgba(0,5,14,.9)); }
+  .environmentalWatch.active:hover .visual { transform: scale(1.035); }
+  .watch-content { position:absolute; inset:0; display:flex; flex-direction:column; padding:5cqw; color:white; font-family: 'Arial Narrow','Roboto Condensed',Arial,sans-serif; text-shadow:0 2px 10px #0009; }
+  .watch-top { display:flex; justify-content:space-between; align-items:center; gap:2cqw; font-size:3cqw; font-weight:800; letter-spacing:.09em; }
+  .watch-live { color:#53f5df; white-space:nowrap; display:flex; align-items:center; gap:1.5cqw; }
+  .watch-live i { width:1.8cqw; height:1.8cqw; border-radius:50%; background:currentColor; box-shadow:0 0 12px currentColor; }
+  .environmentalWatch[data-href] .watch-live i { animation:watchPulse 2s ease-in-out infinite; }
+  @keyframes watchPulse { 50% { opacity:.45; } }
+  .watch-bottom { margin-top:auto; }
+  .watch-bottom h2 { font-family:inherit; font-weight:900; font-size:min(7.6cqw,9.5cqh); letter-spacing:-.045em; line-height:.98; color:white; }
+  .watch-bottom h2 span,.watch-bottom h2 strong { display:block; }
+  .watch-bottom h2 strong { font-size:1.85em; letter-spacing:-.035em; }
+  .watch-description { margin-top:2cqh; color:white; font-size: min(3.35cqw,4cqh); line-height:1.25; font-style:italic; }
+  .watch-tags { margin-top:2.5cqh; color:#c4edf2; font-size: min(2.55cqw,3cqh); font-weight:700; text-transform:uppercase; letter-spacing:.03em; }
+  .watch-link { margin-top:3cqh; padding-top:2cqh; border-top:1px solid #a9e6ef88; font-weight:700; font-size:min(3.7cqw,4.2cqh); }
+  .card.environmentalWatch[data-href].active { cursor:pointer; }
+  @media(prefers-reduced-motion:reduce) { .watch-live i { animation:none !important; } .environmentalWatch .visual { transition:none; } }
+
 </style>
